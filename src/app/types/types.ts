@@ -1,3 +1,4 @@
+import { statuses } from "../api/statuses";
 import React from "react";
 
 export type TCategory = {
@@ -9,11 +10,8 @@ export type TPriority = {
   _id: string;
   name: string;
 };
-export type TStatuses = {
-  _id: string;
-  name: string;
-  color: string;
-};
+export type TStatus = keyof typeof statuses;
+
 export type TTicket = {
   id: string | number;
   number: string;
@@ -26,7 +24,7 @@ export type TTicket = {
   technician: string;
   reaction: string;
   resolution: string;
-  status: TStatuses;
+  status: TStatus;
 };
 
 export type TColumn<T> = {

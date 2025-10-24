@@ -2,7 +2,7 @@ import { HStack, Text, Icon } from "@chakra-ui/react";
 import { CgShapeRhombus } from "react-icons/cg";
 import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import type { TPriority } from "@/types";
+import type { TPriority } from "@/app/types/types";
 
 type PriorityProps = {
   priority: TPriority;

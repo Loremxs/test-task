@@ -1,9 +1,9 @@
-import CustomTable from "./components/common/table/CustomTable";
-import type { TColumn, TicketsTableProps, TTicket } from "@/types";
-import Status from "@/components/ui/Status";
-import Priority from "@/components/ui/Priority";
-import Pharmacy from "@/components/ui/Pharmacy";
-import Category from "@/components/ui/Category";
+import CustomTable from "../common/table/CustomTable";
+import type { TColumn, TicketsTableProps, TTicket } from "@/app/types/types";
+import StatusBadge from "@/app/components/ui/StatusBadge";
+import Priority from "@/app/components/ui/Priority";
+import Pharmacy from "@/app/components/ui/Pharmacy";
+import Category from "@/app/components/ui/Category";
 
 const columns: Record<string, TColumn<TTicket>> = {
   number: { path: "number", name: "№" },
@@ -35,7 +35,7 @@ const columns: Record<string, TColumn<TTicket>> = {
   status: {
     path: "status",
     name: "Статус",
-    component: (ticket: TTicket) => <Status status={ticket.status} />,
+    component: (ticket: TTicket) => <StatusBadge status={ticket.status} />,
   },
 };
 const TicketsTable: React.FC<TicketsTableProps> = ({ tickets }) => {

@@ -1,6 +1,6 @@
 import { Table } from "@chakra-ui/react";
 import _ from "lodash";
-import type { TColumn } from "@/types";
+import type { TColumn } from "@/app/types/types";
 
 type CustomTableBodyProps<T> = {
   data: T[];

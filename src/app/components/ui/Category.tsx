@@ -1,4 +1,4 @@
-import type { TCategory } from "@/types";
+import type { TCategory } from "@/app/types/types";
 
 type CategoryProps = {
   category: TCategory;
