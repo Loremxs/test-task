@@ -1,0 +1,21 @@
+.status-badge-color-new {
+  background-color: #f0cdfa;
+}
+.status-badge-color-rejected {
+  background-color: #b93c3c;
+}
+.status-badge-color-review {
+  background-color: orangered;
+}
+.status-badge-color-processed {
+  background-color: #ffebb3;
+}
+.status-badge-color-waiting {
+  background-color: orange;
+}
+.status-badge-color-ready {
+  background-color: #a2e3a4;
+}
+.status-badge-color-closed {
+  background-color: #f1f1f1;
+}

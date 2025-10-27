@@ -1,21 +1,17 @@
 import { Button, HStack } from "@chakra-ui/react";
-export type FilterItem<T> = {
-  key?: string;
-  value: T;
-  label: string;
-};
+import type { FilterItem } from "../types/types";
 
-type FiltersGroupProps<T> = {
+type FiltersItemProps<T> = {
   items: FilterItem<T>[];
   onItemSelect: (value: T) => void;
   selectedItem: T;
 };
 
-function FiltersGroup<T>({
+function FiltersItem<T>({
   items,
   onItemSelect,
   selectedItem,
-}: FiltersGroupProps<T>) {
+}: FiltersItemProps<T>) {
   return (
     <HStack wrap="wrap">
       {items?.map((item) => {
@@ -24,8 +20,8 @@ function FiltersGroup<T>({
         return (
           <Button
             key={String(value)}
-            variant={isSelected ? "solid" : "outline"}
-            size="sm"
+            variant={isSelected ? "solid" : "subtle"}
+            size="md"
             onClick={() => onItemSelect(value)}
           >
             {item?.label}
@@ -36,4 +32,4 @@ function FiltersGroup<T>({
   );
 }
 
-export default FiltersGroup;
+export default FiltersItem;

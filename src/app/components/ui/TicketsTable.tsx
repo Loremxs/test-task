@@ -4,6 +4,9 @@ import StatusBadge from "@/app/components/ui/StatusBadge";
 import Priority from "@/app/components/ui/Priority";
 import Pharmacy from "@/app/components/ui/Pharmacy";
 import Category from "@/app/components/ui/Category";
+import { prioritiesById } from "@/app/api/priorities";
+import { categoriesById } from "@/app/api/categories";
+import CreatedAtTime from "./CreatedAtTime";
 
 const columns: Record<string, TColumn<TTicket>> = {
   number: { path: "number", name: "№" },
@@ -17,17 +20,27 @@ const columns: Record<string, TColumn<TTicket>> = {
       />
     ),
   },
-  createdAt: { path: "createdAt", name: "Создана" },
+  createdAt: {
+    path: "createdAt",
+    name: "Создана",
+    component: (ticket: TTicket) => (
+      <CreatedAtTime createdAt={ticket.createdAt} />
+    ),
+  },
   priority: {
     path: "priority",
     name: "Приоритет",
-    component: (ticket: TTicket) => <Priority priority={ticket.priority} />,
+    component: (ticket: TTicket) => (
+      <Priority priority={prioritiesById[ticket.priority]} />
+    ),
   },
   topic: { path: "topic", name: "Тема" },
   category: {
     path: "category",
     name: "Категория",
-    component: (ticket: TTicket) => <Category category={ticket.category} />,
+    component: (ticket: TTicket) => (
+      <Category category={categoriesById[ticket.category]} />
+    ),
   },
   technician: { path: "technician", name: "Техник" },
   reaction: { path: "reaction", name: "Реакция" },

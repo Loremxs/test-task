@@ -50,3 +50,9 @@ export type TTableBodyProps<T> = {
 export type TicketsTableProps = {
   tickets: TTicket[];
 };
+
+export type FilterItem<T> = {
+  key?: string;
+  value: T;
+  label: string;
+};

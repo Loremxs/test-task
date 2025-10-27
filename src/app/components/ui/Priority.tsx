@@ -11,21 +11,21 @@ type PriorityProps = {
 const Priority: React.FC<PriorityProps> = ({ priority }) => {
   let icon;
   let color;
-  const label = priority.name;
-  switch (label.toLowerCase()) {
-    case "критич.":
+  const priorityId = priority._id;
+  switch (priorityId) {
+    case "pr_1":
       icon = MdKeyboardDoubleArrowUp;
       color = "red.600";
       break;
-    case "высокий":
+    case "pr_2":
       icon = IoIosArrowUp;
       color = "red.500";
       break;
-    case "средний":
+    case "pr_3":
       icon = CgShapeRhombus;
       color = "orange.400";
       break;
-    case "низкий":
+    case "pr_4":
       icon = IoIosArrowDown;
       color = "blue.600";
       break;
@@ -37,7 +37,7 @@ const Priority: React.FC<PriorityProps> = ({ priority }) => {
   return (
     <HStack>
       <Icon as={icon} color={color} />
-      <Text>{label}</Text>
+      <Text>{priority.name}</Text>
     </HStack>
   );
 };

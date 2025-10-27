@@ -8,6 +8,6 @@ export const statusesConfig: Record<
   review: { localization: "На рассмотрении", color: "orange" },
   processed: { localization: "В работе", color: "#FFEBB3" },
   waiting: { localization: "Ожидают запчасти", color: "cyan" },
-  ready: { localization: "Готовы", color: "green" },
+  ready: { localization: "Готово", color: "green" },
   closed: { localization: "Закрыты", color: "gray" },
 };
