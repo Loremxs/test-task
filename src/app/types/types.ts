@@ -18,12 +18,12 @@ export type TTicket = {
   pharmacyCode: string;
   pharmacyName: string;
   createdAt: string;
-  priority: TPriority;
+  priority: string;
   topic: string;
-  category: TCategory;
+  category: string;
   technician: string;
-  reaction: string;
-  resolution: string;
+  reaction?: string;
+  resolution?: string;
   status: TStatus;
 };
 

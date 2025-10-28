@@ -23,8 +23,10 @@ const getFileIconOrPreview = (file) => {
   if (ext === "pdf") {
     return (
       <Box
-        bg="red"
-        color="white"
+        bg="white"
+        color="red.500"
+        border="1px solid"
+        borderColor="red.500"
         fontWeight="bold"
         fontSize="xs"
         px={2}

@@ -1,8 +1,7 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo, useCallback } from "react";
 import { Stack, HStack, Separator } from "@chakra-ui/react";
 import { statuses } from "@/app/api/statuses";
-import { mockTickets } from "@/app/api/tickets.api";
-import type { TTicket, TStatus, TCategory, TPriority } from "@/app/types/types";
+import type { TStatus } from "@/app/types/types";
 import type { FilterItem } from "@/app/types/types";
 import FiltersGroup from "../FiltersGroup";
 import TicketsTable from "../ui/TicketsTable";
@@ -10,30 +9,26 @@ import SearchInput from "../ui/SearchInput";
 import { statusesConfig } from "../../constants/statuses";
 import { useFilterTickets } from "../../hooks/useFilterTickets";
 import TicketsModal from "../ui/TicketsModal";
-import { categories } from "@/app/api/categories";
-import { priorities } from "@/app/api/priorities";
 import PDFExportButton from "../ui/PDFExportButton";
 import OnlyMyTicketsFilter from "../ui/OnlyMyTicketsFilter";
+import { useTicketsStore } from "@/app/useTicketsStore";
 
 const TicketsListPage = () => {
-  const [tickets, setTickets] = useState<TTicket[]>([]);
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<TStatus | null>(null);
-  const [categoriesData, setCategories] = useState<Record<string, TCategory>>(
-    {}
-  );
-  const [prioritiesData, setPriorities] = useState<Record<string, TPriority>>(
-    {}
-  );
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setTickets(mockTickets);
-      setCategories(categories);
-      setPriorities(priorities);
-    }, 1000);
+  const {
+    tickets,
+    categories,
+    priorities,
+    search,
+    statusFilter,
+    setSearch,
+    setStatusFilter,
+    loadMockData,
+  } = useTicketsStore();
 
+  useEffect(() => {
+    const timer = setTimeout(loadMockData, 1000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [loadMockData]);
 
   const filteredTickets = useFilterTickets({ search, statusFilter, tickets });
 
@@ -64,8 +59,8 @@ const TicketsListPage = () => {
           <PDFExportButton /> {/*заглушка */}
           <TicketsModal
             tickets={tickets}
-            categories={categoriesData}
-            priorities={prioritiesData}
+            categories={categories}
+            priorities={priorities}
           />
         </HStack>
         <Stack direction="row" gap="2" flexWrap="wrap">
@@ -80,7 +75,11 @@ const TicketsListPage = () => {
           </HStack>
         </Stack>
       </Stack>
-      <TicketsTable tickets={filteredTickets} />
+      <TicketsTable
+        tickets={filteredTickets}
+        priorities={priorities}
+        categories={categories}
+      />
     </Stack>
   );
 };

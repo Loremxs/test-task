@@ -1,15 +1,23 @@
+"use client";
+
 import { Table, Stack } from "@chakra-ui/react";
-import CustomTableBody from "./CustomTableBody";
+import { type Table as TanStackTable } from "@tanstack/react-table";
 import CustomTableHeader from "./CustomTableHeader";
-import type { TTableProps } from "@/app/types/types";
-const CustomTable = <T,>({ data, columns }: TTableProps<T>) => {
+import CustomTableBody from "./CustomTableBody";
+
+type CustomTableProps<T> = {
+  table: TanStackTable<T>;
+};
+
+const CustomTable = <T,>({ table }: CustomTableProps<T>) => {
   return (
     <Stack gap="10">
-      <Table.Root size="sm" variant="outline">
-        <CustomTableHeader<T> columns={columns} />
-        <CustomTableBody<T> data={data} columns={columns} />
+      <Table.Root size="sm" variant="outline" native>
+        <CustomTableHeader table={table} />
+        <CustomTableBody table={table} />
       </Table.Root>
     </Stack>
   );
 };
+
 export default CustomTable;
