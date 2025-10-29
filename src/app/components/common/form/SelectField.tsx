@@ -7,6 +7,7 @@ const SelectField = ({
   placeholder,
   options,
   value,
+  size,
   onChange,
   CustomSelectedValue,
   CustomIndicator,
@@ -14,12 +15,12 @@ const SelectField = ({
   return (
     <Select.Root
       collection={options}
-      size="sm"
-      width="320px"
+      size={size}
       onValueChange={(e) => {
         onChange(e.value);
       }}
       value={value}
+      borderRadius="lg"
     >
       <Select.HiddenSelect />
       <Select.Label>{label}</Select.Label>

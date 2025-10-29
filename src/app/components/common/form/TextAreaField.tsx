@@ -9,6 +9,8 @@ const TextAreaField = ({ placeholder, label, value, onChange }) => {
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          rows={7}
+          resize="none"
         />
       </Field.Root>
     </HStack>

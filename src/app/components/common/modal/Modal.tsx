@@ -16,6 +16,7 @@ const Modal = ({
   children,
   footer,
   onOpenChange,
+  hideFooter,
 }: ModalProps) => {
   const [open, setOpen] = useState(false);
 
@@ -30,22 +31,31 @@ const Modal = ({
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content>
+          <Dialog.Content
+            maxW="1000px"
+            w="full"
+            bg="white"
+            borderRadius="lg"
+            overflow="hidden"
+          >
             <Dialog.Header>
               <Dialog.Title>{title}</Dialog.Title>
             </Dialog.Header>
-            <Dialog.Body>{children}</Dialog.Body>
+            <Dialog.Body maxH="70vh" overflowY="auto" px={6} py={4}>
+              {children}
+            </Dialog.Body>
             <Dialog.Footer>
-              {footer ? (
-                footer
-              ) : (
-                <>
-                  <Dialog.ActionTrigger asChild>
-                    <Button variant="outline">Отмена</Button>
-                  </Dialog.ActionTrigger>
-                  <Button>Сохранить</Button>
-                </>
-              )}
+              {!hideFooter &&
+                (footer ? (
+                  footer
+                ) : (
+                  <>
+                    <Dialog.ActionTrigger asChild>
+                      <Button variant="outline">Отмена</Button>
+                    </Dialog.ActionTrigger>
+                    <Button>Сохранить</Button>
+                  </>
+                ))}
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>
               <CloseButton size="sm" />

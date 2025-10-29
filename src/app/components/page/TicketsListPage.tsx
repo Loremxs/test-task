@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useCallback } from "react";
+import { useEffect, useMemo, useCallback, useState } from "react";
 import { Stack, HStack, Separator } from "@chakra-ui/react";
 import { statuses } from "@/app/api/statuses";
 import type { TStatus } from "@/app/types/types";
@@ -11,27 +11,23 @@ import { useFilterTickets } from "../../hooks/useFilterTickets";
 import TicketsModal from "../ui/TicketsModal";
 import PDFExportButton from "../ui/PDFExportButton";
 import OnlyMyTicketsFilter from "../ui/OnlyMyTicketsFilter";
+import { useTicketsPageStore } from "@/app/hooks/useTicketsPageStore";
 import { useTicketsStore } from "@/app/useTicketsStore";
+import { usePrioritiesStore } from "@/app/usePrioritiesStore";
+import { useCategoriesStore } from "@/app/useCategoriesStore";
 
 const TicketsListPage = () => {
-  const {
-    tickets,
-    categories,
-    priorities,
-    search,
-    statusFilter,
-    setSearch,
-    setStatusFilter,
-    loadMockData,
-  } = useTicketsStore();
-
+  const { priorities } = usePrioritiesStore();
+  const { categories } = useCategoriesStore();
+  const { tickets } = useTicketsStore();
+  const { loadAll } = useTicketsPageStore();
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState(null);
   useEffect(() => {
-    const timer = setTimeout(loadMockData, 1000);
-    return () => clearTimeout(timer);
-  }, [loadMockData]);
+    loadAll();
+  }, []);
 
   const filteredTickets = useFilterTickets({ search, statusFilter, tickets });
-
   const statusesFilterList = useMemo<FilterItem<TStatus | null>[]>(() => {
     const baseStatuses = Object.keys(statuses).map((status) => ({
       key: "status",
@@ -57,11 +53,7 @@ const TicketsListPage = () => {
         <HStack>
           <SearchInput value={search} onChange={setSearch} />
           <PDFExportButton /> {/*заглушка */}
-          <TicketsModal
-            tickets={tickets}
-            categories={categories}
-            priorities={priorities}
-          />
+          <TicketsModal />
         </HStack>
         <Stack direction="row" gap="2" flexWrap="wrap">
           <HStack gap="2" flexWrap="wrap">

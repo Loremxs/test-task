@@ -6,9 +6,18 @@ import type { TPriority } from "@/app/types/types";
 
 type PriorityProps = {
   priority: TPriority;
+  showAdditionalInfo?: boolean;
 };
-
-const Priority: React.FC<PriorityProps> = ({ priority }) => {
+const additionalInfoByPriorityId = {
+  pr_1: "срочно требуется помощь",
+  pr_2: "влияет на эффективность, мешает работать",
+  pr_3: "влияет на эффективность, но не стопорит",
+  pr_4: "требуется не скорая помощь",
+};
+const Priority: React.FC<PriorityProps> = ({
+  priority,
+  showAdditionalInfo,
+}) => {
   let icon;
   let color;
   const priorityId = priority._id;
@@ -33,11 +42,17 @@ const Priority: React.FC<PriorityProps> = ({ priority }) => {
       icon = CgShapeRhombus;
       color = "gray.400";
   }
-
   return (
-    <HStack>
+    <HStack spacing={1} align="center">
       <Icon as={icon} color={color} />
-      <Text>{priority.name}</Text>
+      <HStack spacing={1}>
+        <Text>{priority.name}</Text>
+        {showAdditionalInfo && (
+          <Text color="gray.500">
+            {additionalInfoByPriorityId[priority._id]}
+          </Text>
+        )}
+      </HStack>
     </HStack>
   );
 };
