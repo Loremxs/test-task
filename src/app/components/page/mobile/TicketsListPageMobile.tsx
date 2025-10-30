@@ -32,7 +32,15 @@ const TicketsListPageMobile = () => {
       value: status as TStatus,
       label: statusesConfig[status as TStatus].localization,
     }));
-    return [{ value: null, label: "Все статусы" }, ...baseStatuses];
+    return [
+      {
+        CustomComponent: (
+          <OnlyMyTicketsFilter />
+        )
+      },
+      { value: null, label: "Все статусы" },
+      ...baseStatuses
+    ];
   }, []);
 
   const handleSelectStatus = useCallback((value: TStatus | null) => {
@@ -40,20 +48,27 @@ const TicketsListPageMobile = () => {
   }, []);
   return (
     <Stack>
-      <HStack gap="2" flexWrap="wrap" align={"center"}>
-        <OnlyMyTicketsFilter /> {/*заглушка */}
-        <FiltersGroup
-          items={statusesFilterList}
-          selectedItem={statusFilter}
-          onItemSelect={handleSelectStatus}
-        />
-      </HStack>
-      {filteredTickets.map((ticket) => {
-        const priority = priorities[ticket.priority];
-        return (
-          <TicketsCard key={ticket.id} ticket={ticket} priority={priority} />
-        );
-      })}
+      <FiltersGroup
+        items={statusesFilterList}
+        selectedItem={statusFilter}
+        onItemSelect={handleSelectStatus}
+      />
+      {/*<HStack style={{ overflow: 'scroll' }}>*/}
+      {/*  <OnlyMyTicketsFilter /> /!*заглушка *!/*/}
+      {/*  <FiltersGroup*/}
+      {/*    items={statusesFilterList}*/}
+      {/*    selectedItem={statusFilter}*/}
+      {/*    onItemSelect={handleSelectStatus}*/}
+      {/*  />*/}
+      {/*</HStack>*/}
+      <Stack p={'10px'}>
+        {filteredTickets.map((ticket) => {
+          const priority = priorities[ticket.priority];
+          return (
+            <TicketsCard key={ticket.id} ticket={ticket} priority={priority} />
+          );
+        })}
+      </Stack>
       <MobileSearchBar value={search} onChange={setSearch} />
     </Stack>
   );

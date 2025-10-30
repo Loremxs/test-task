@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
-import { Stack, HStack, Separator } from "@chakra-ui/react";
+import { Stack, HStack, Separator, Loader } from "@chakra-ui/react";
 import { statuses } from "@/app/api/statuses";
 import FiltersGroup from "../../FiltersGroup";
 import TicketsTable from "../../ui/TicketsTable";
@@ -13,11 +13,12 @@ import { useTicketsPageStore } from "@/app/hooks/useTicketsPageStore";
 import { useTicketsStore } from "@/app/useTicketsStore";
 import { usePrioritiesStore } from "@/app/usePrioritiesStore";
 import { useCategoriesStore } from "@/app/useCategoriesStore";
+import type { FilterItem, TStatus } from "@/app/types/types.ts";
 
 const TicketsListPageDesktop = () => {
   const { priorities } = usePrioritiesStore();
   const { categories } = useCategoriesStore();
-  const { tickets } = useTicketsStore();
+  const { tickets, isLoading } = useTicketsStore();
   const { loadAll } = useTicketsPageStore();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState(null);
@@ -32,7 +33,18 @@ const TicketsListPageDesktop = () => {
       value: status as TStatus,
       label: statusesConfig[status as TStatus].localization,
     }));
-    return [...baseStatuses, { value: null, label: "Все статусы" }];
+    return [
+      ...baseStatuses,
+      { value: null, label: "Все статусы" },
+      {
+        CustomComponent: (
+          <HStack>
+            <Separator orientation="vertical" height="9" size="lg" />
+            <OnlyMyTicketsFilter />
+          </HStack>
+        ),
+      },
+    ];
   }, []);
 
   const handleSelectStatus = useCallback((value: TStatus | null) => {
@@ -53,24 +65,22 @@ const TicketsListPageDesktop = () => {
           <PDFExportButton /> {/*заглушка */}
           <TicketsModal />
         </HStack>
-        <Stack direction="row" gap="2" flexWrap="wrap">
-          <HStack gap="2" flexWrap="wrap">
-            <FiltersGroup
-              items={statusesFilterList}
-              selectedItem={statusFilter}
-              onItemSelect={handleSelectStatus}
-            />
-            <Separator orientation="vertical" height="9" size="lg" />
-            <OnlyMyTicketsFilter /> {/*заглушка */}
-          </HStack>
-        </Stack>
+        <FiltersGroup
+          items={statusesFilterList}
+          selectedItem={statusFilter}
+          onItemSelect={handleSelectStatus}
+        />
       </Stack>
       <Stack px={10} py={7}>
-        <TicketsTable
-          tickets={filteredTickets}
-          priorities={priorities}
-          categories={categories}
-        />
+        {!isLoading ? (
+          <TicketsTable
+            tickets={filteredTickets}
+            priorities={priorities}
+            categories={categories}
+          />
+        ) : (
+          <Loader />
+        )}
       </Stack>
     </Stack>
   );

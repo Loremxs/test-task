@@ -13,14 +13,19 @@ type TicketsState = {
   loadTicketsMockData: () => void;
 };
 
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
 export const useTicketsStore = create<TicketsState>((set) => ({
   tickets: [],
   categories: {},
   priorities: {},
   categoriesList: [],
   prioritiesList: [],
+  isLoading: false,
 
-  loadTicketsMockData: () => {
+  loadTicketsMockData: async () => {
+    set({ isLoading: true })
+    await delay(2000)
     const categoriesMap = categories.reduce(
       (acc, c) => ({ ...acc, [c._id]: c }),
       {}
@@ -35,6 +40,7 @@ export const useTicketsStore = create<TicketsState>((set) => ({
       priorities: prioritiesMap, // const
       categoriesList: categories,
       prioritiesList: priorities,
+      isLoading: false
     });
   },
 }));

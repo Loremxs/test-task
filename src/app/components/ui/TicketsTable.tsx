@@ -95,7 +95,7 @@ const TicketsTable: React.FC<TicketsTableProps> = ({
       borderBottomRadius="none"
       borderLeft="none"
       borderRight="none"
-      overflow="hidden"
+      overflow="auto"
     >
       <CustomTable table={table} />
     </Box>

@@ -17,8 +17,10 @@ const Navbar = () => {
       borderColor="#D9E1EC"
       position="sticky"
       top="0"
+      bg="white"
+      zIndex="1000"
     >
-      <HStack spacing={6} px={20}>
+      <HStack px={20}>
         <ChakraLink as={Link} to="/" color={isActive ? "#1C1C1C" : "#B0B0B0"}>
           Заявки
         </ChakraLink>
@@ -32,7 +34,7 @@ const Navbar = () => {
         </ChakraLink>
       </HStack>
       <Spacer />
-      <HStack spacing={4}>
+      <HStack>
         <ChakraLink as={Link} to="/profile">
           <AvatarProfile />
         </ChakraLink>

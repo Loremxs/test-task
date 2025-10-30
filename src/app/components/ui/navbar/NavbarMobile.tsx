@@ -10,17 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import AvatarProfile from "../AvatarProfile";
-
-const pages = [
-  { title: "Заявки", path: "/" },
-  { title: "Отчёты", path: "/reports" },
-  { title: "Справочники", path: "/directory" },
-];
+import { pagesMobile } from "@/app/constants/pagesMobile";
 
 const NavbarMobile = () => {
   const location = useLocation();
 
-  const currentPage = pages.find(
+  const currentPage = pagesMobile.find(
     (page) => page.path === location.pathname
   )?.title;
 
@@ -35,7 +30,8 @@ const NavbarMobile = () => {
       borderColor="#D9E1EC"
       position="sticky"
       top="0"
-      zIndex="100"
+      zIndex="1000"
+      bg={"white"}
     >
       <MenuRoot>
         <MenuTrigger asChild>
@@ -47,7 +43,7 @@ const NavbarMobile = () => {
         <Portal>
           <MenuPositioner>
             <MenuContent>
-              {pages.map((page) => (
+              {pagesMobile.map((page) => (
                 <MenuItem key={page.path} asChild value={page.title}>
                   <Link to={page.path}>{page.title}</Link>
                 </MenuItem>

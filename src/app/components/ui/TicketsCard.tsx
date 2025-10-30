@@ -5,7 +5,7 @@ import InfoBadge from "./InfoBadge";
 
 const TicketsCard = ({ ticket, priority }) => {
   return (
-    <Card.Root size="sm" px={3} py={2} borderRadius="md" shadow="sm">
+    <Card.Root size="sm" px={3} py={2} borderRadius="md" shadow="sm" minH={94}>
       <Stack>
         <HStack align="flex-start">
           <Heading size="sm">{ticket.topic}</Heading>

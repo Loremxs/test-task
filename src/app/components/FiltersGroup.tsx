@@ -1,4 +1,5 @@
 import { Button, HStack, Box, useBreakpointValue } from "@chakra-ui/react";
+import '../styles/FiltersGroup.css'
 import type { FilterItem } from "../types/types";
 
 type FiltersGroupProps<T> = {
@@ -13,48 +14,27 @@ const FiltersGroup = <T,>({
   selectedItem,
 }: FiltersGroupProps<T>) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
-  if (isMobile) {
-    return (
-      <Box
-        w="100%"
-        overflowX="auto"
-        overflowY="hidden"
-        css={{
-          "&::-webkit-scrollbar": { display: "none" },
-          "-ms-overflow-style": "none",
-          "scrollbar-width": "none",
-        }}
-      >
-        <HStack gap="2" py="2" px="1" w="max-content">
-          {items?.map((item) => {
-            const isSelected = selectedItem === item.value;
-            return (
-              <Button
-                key={String(item.value)}
-                variant={isSelected ? "solid" : "subtle"}
-                size="sm"
-                onClick={() => onItemSelect(item.value)}
-                whiteSpace="nowrap"
-                flexShrink={0}
-              >
-                {item.label}
-              </Button>
-            );
-          })}
-        </HStack>
-      </Box>
-    );
-  }
 
   return (
-    <HStack wrap="wrap" gap="2" py="2">
+    <HStack
+      wrap={isMobile ? undefined :'wrap'}
+      overflowX={isMobile ? 'auto' : undefined}
+      gap="2"
+      py="2"
+      className={'filters-group-container'}
+    >
       {items?.map((item) => {
         const isSelected = selectedItem === item.value;
+
+        if (item.CustomComponent) {
+          return item.CustomComponent
+        }
+
         return (
           <Button
             key={String(item.value)}
             variant={isSelected ? "solid" : "subtle"}
-            size="md"
+            size={isMobile ? 'sm' : 'md'}
             onClick={() => onItemSelect(item.value)}
           >
             {item.label}
