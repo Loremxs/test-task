@@ -9,15 +9,7 @@ const UploadFileField = ({ label, placeholder, value = [], onChange }) => {
   const handleFileChange = useCallback(
     (e) => {
       const newFiles = Array.from(e.acceptedFiles || []);
-
-      const uniqueFiles = newFiles.filter(
-        (newFile) =>
-          !value.some(
-            (existing) =>
-              existing.name === newFile.name && existing.size === newFile.size
-          )
-      );
-      onChange([...value, ...uniqueFiles]);
+      onChange([...value, ...newFiles]);
       // странная хуйня показать роме
       if (inputRef.current) {
         inputRef.current.value = "";
@@ -25,7 +17,6 @@ const UploadFileField = ({ label, placeholder, value = [], onChange }) => {
     },
     [onChange, value]
   );
-
   const handleRemove = useCallback(
     (index) => {
       const updated = value.filter((_, i) => i !== index);
@@ -36,21 +27,29 @@ const UploadFileField = ({ label, placeholder, value = [], onChange }) => {
 
   return (
     <FileUpload.Root
-      maxW="xl"
       alignItems="stretch"
       maxFiles={10}
       onFileChange={handleFileChange}
       key={value?.length}
+      gap={1}
     >
       <FileUpload.HiddenInput ref={inputRef} key={value.length} />
-      <FileUpload.Label>{label}</FileUpload.Label>
-      <FileUpload.Dropzone cursor="pointer">
-        <Icon as={CiImageOn} boxSize={6} color="gray.400" />
+      <FileUpload.Label fontSize={"12px"} fontWeight={400}>
+        {label}
+      </FileUpload.Label>
+      <FileUpload.Dropzone
+        cursor="pointer"
+        minH="100px"
+        p={3}
+        borderRadius="14px"
+        borderColor={"#B0B0B0"}
+      >
         <FileUpload.DropzoneContent>
           <Box color="gray.500" fontSize="sm">
             {placeholder}
           </Box>
         </FileUpload.DropzoneContent>
+        <Icon as={CiImageOn} boxSize={6} />
       </FileUpload.Dropzone>
 
       <CustomFileUploadList files={value} onRemove={handleRemove} />

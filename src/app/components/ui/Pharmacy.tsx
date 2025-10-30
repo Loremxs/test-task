@@ -1,7 +1,6 @@
 import { HStack } from "@chakra-ui/react";
 import PharmacyName from "./PharmacyName";
-import PharmacyCode from "./PharmacyCode";
-
+import InfoBadge from "./InfoBadge";
 type PharmacyProps = {
   pharmacyCode: string;
   pharmacyName: string;
@@ -10,7 +9,7 @@ type PharmacyProps = {
 const Pharmacy: React.FC<PharmacyProps> = ({ pharmacyCode, pharmacyName }) => {
   return (
     <HStack>
-      <PharmacyCode pharmacyCode={pharmacyCode} />
+      <InfoBadge info={pharmacyCode} />
       <PharmacyName pharmacyName={pharmacyName} />
     </HStack>
   );

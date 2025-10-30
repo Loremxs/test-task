@@ -7,8 +7,8 @@ const CheckboxField = ({ label, value, onChange }) => {
       onCheckedChange={(e) => onChange(!!e.checked)}
     >
       <Checkbox.HiddenInput />
-      <Checkbox.Control />
-      <Checkbox.Label>{label}</Checkbox.Label>
+      <Checkbox.Control borderRadius="5px" />
+      <Checkbox.Label fontWeight={400}>{label}</Checkbox.Label>
     </Checkbox.Root>
   );
 };

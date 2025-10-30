@@ -1,22 +1,20 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
 import { Stack, HStack, Separator } from "@chakra-ui/react";
 import { statuses } from "@/app/api/statuses";
-import type { TStatus } from "@/app/types/types";
-import type { FilterItem } from "@/app/types/types";
-import FiltersGroup from "../FiltersGroup";
-import TicketsTable from "../ui/TicketsTable";
-import SearchInput from "../ui/SearchInput";
-import { statusesConfig } from "../../constants/statuses";
-import { useFilterTickets } from "../../hooks/useFilterTickets";
-import TicketsModal from "../ui/TicketsModal";
-import PDFExportButton from "../ui/PDFExportButton";
-import OnlyMyTicketsFilter from "../ui/OnlyMyTicketsFilter";
+import FiltersGroup from "../../FiltersGroup";
+import TicketsTable from "../../ui/TicketsTable";
+import SearchInput from "../../ui/SearchInput";
+import { statusesConfig } from "../../../constants/statuses";
+import { useFilterTickets } from "../../../hooks/useFilterTickets";
+import TicketsModal from "../../ui/TicketsModal";
+import PDFExportButton from "../../ui/PDFExportButton";
+import OnlyMyTicketsFilter from "../../ui/OnlyMyTicketsFilter";
 import { useTicketsPageStore } from "@/app/hooks/useTicketsPageStore";
 import { useTicketsStore } from "@/app/useTicketsStore";
 import { usePrioritiesStore } from "@/app/usePrioritiesStore";
 import { useCategoriesStore } from "@/app/useCategoriesStore";
 
-const TicketsListPage = () => {
+const TicketsListPageDesktop = () => {
   const { priorities } = usePrioritiesStore();
   const { categories } = useCategoriesStore();
   const { tickets } = useTicketsStore();
@@ -45,9 +43,9 @@ const TicketsListPage = () => {
     <Stack>
       <Stack
         py={5}
+        px={10}
         borderBottom="1px solid"
         borderColor="#D9E1EC"
-        px={7}
         gap={3}
       >
         <HStack>
@@ -67,13 +65,15 @@ const TicketsListPage = () => {
           </HStack>
         </Stack>
       </Stack>
-      <TicketsTable
-        tickets={filteredTickets}
-        priorities={priorities}
-        categories={categories}
-      />
+      <Stack px={10} py={7}>
+        <TicketsTable
+          tickets={filteredTickets}
+          priorities={priorities}
+          categories={categories}
+        />
+      </Stack>
     </Stack>
   );
 };
 
-export default TicketsListPage;
+export default TicketsListPageDesktop;

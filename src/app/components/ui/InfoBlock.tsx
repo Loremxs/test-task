@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Text, List } from "@chakra-ui/react";
+import { Box, HStack, Text, List } from "@chakra-ui/react";
 import { IoWarningSharp, IoCloseSharp } from "react-icons/io5";
 type InfoBlockProps = {
   type: "warning" | "danger";
@@ -7,7 +7,6 @@ type InfoBlockProps = {
 };
 
 const InfoBlock = ({ type, title, list }: InfoBlockProps) => {
-  let color;
   let icon;
   let borderColor;
   let iconColor;
@@ -15,15 +14,13 @@ const InfoBlock = ({ type, title, list }: InfoBlockProps) => {
   let size;
   switch (type) {
     case "warning":
-      color = "#FFFAD4";
       icon = IoWarningSharp;
       borderColor = "yellow.200";
       iconColor = "";
-      size = "sm";
+      size = "";
       bg = "#FFFAD4";
       break;
     case "danger":
-      color = "#FFECEC";
       icon = IoCloseSharp;
       size = "md";
       borderColor = "red.200";
@@ -34,17 +31,18 @@ const InfoBlock = ({ type, title, list }: InfoBlockProps) => {
   return (
     <Box
       bg={bg}
-      borderRadius="md"
-      p={4}
-      border="1px solid"
+      borderRadius="10px"
+      p={2}
       borderColor={borderColor}
       w="full"
+      flex="1"
+      fontSize="10px"
+      color="#1C1C1C"
     >
       <HStack>
-        <Icon as={icon} color={iconColor} size={size} />
         <Text>{title}</Text>
       </HStack>
-      <List.Root as="ul" pl={4} fontSize="xs" width={220}>
+      <List.Root as="ul" pl={4} pt={2} lineHeight={"shorter"}>
         {list.map((item, i) => (
           <List.Item as="li" key={i}>
             {item}

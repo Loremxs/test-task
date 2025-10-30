@@ -1,18 +1,18 @@
 import "./App.css";
-import Navbar from "./components/ui/Navbar";
-import TicketsListPage from "./components/page/TicketsListPage";
+import NavbarContainer from "./components/ui/navbar/NavbarContainer";
 import Directory from "./layouts/Directory";
 import Reports from "./layouts/Reports";
 import Profile from "./layouts/Profile";
 import Exit from "./layouts/Exit";
 import { Route, Routes } from "react-router";
+import TicketsList from "./layouts/Tickets";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <NavbarContainer />
       <Routes>
-        <Route path="/" element={<TicketsListPage />} />
+        <Route path="/" element={<TicketsList />} />
         <Route path="/reports" element={<Directory />} />
         <Route path="/directory" element={<Reports />} />
         <Route path="/profile" element={<Profile />} />

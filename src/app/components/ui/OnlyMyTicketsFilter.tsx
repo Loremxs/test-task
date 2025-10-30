@@ -1,13 +1,12 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { Button, useBreakpointValue } from "@chakra-ui/react";
 import { FiFilter } from "react-icons/fi";
 
 const OnlyMyTicketsFilter = () => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   return (
-    <HStack>
-      <Button variant="subtle">
-        <FiFilter /> Показать только мои
-      </Button>
-    </HStack>
+    <Button variant={"subtle"} size={isMobile ? "xs" : "md"}>
+      <FiFilter opacity={0.4} /> {!isMobile && "Показать только мои"}
+    </Button>
   );
 };
 export default OnlyMyTicketsFilter;

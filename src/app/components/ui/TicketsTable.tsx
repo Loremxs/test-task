@@ -13,6 +13,7 @@ import Priority from "@/app/components/ui/Priority";
 import Pharmacy from "@/app/components/ui/Pharmacy";
 import Category from "@/app/components/ui/Category";
 import CreatedAtTime from "./CreatedAtTime";
+import { Box } from "@chakra-ui/react";
 
 type TicketsTableProps = {
   tickets: TTicket[];
@@ -86,7 +87,19 @@ const TicketsTable: React.FC<TicketsTableProps> = ({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  return <CustomTable table={table} />;
+  return (
+    <Box
+      border="1px solid"
+      borderColor="gray.200"
+      borderTopRadius="lg"
+      borderBottomRadius="none"
+      borderLeft="none"
+      borderRight="none"
+      overflow="hidden"
+    >
+      <CustomTable table={table} />
+    </Box>
+  );
 };
 
 export default TicketsTable;

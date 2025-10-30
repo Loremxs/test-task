@@ -1,6 +1,6 @@
 "use client";
 import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react";
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, cloneElement, isValidElement } from "react";
 
 type ModalProps = {
   title: string;
@@ -8,6 +8,7 @@ type ModalProps = {
   children: ReactNode;
   footer?: ReactNode;
   onOpenChange?: (open: boolean) => void;
+  hideFooter?: boolean;
 };
 
 const Modal = ({
@@ -25,25 +26,32 @@ const Modal = ({
     onOpenChange?.(e.open);
   };
 
+  const onClose = () => setOpen(false);
+
   return (
     <Dialog.Root lazyMount open={open} onOpenChange={handleChange}>
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
+
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content
-            maxW="1000px"
+            maxW="1007px"
             w="full"
             bg="white"
-            borderRadius="lg"
+            borderRadius="15px"
             overflow="hidden"
           >
             <Dialog.Header>
-              <Dialog.Title>{title}</Dialog.Title>
+              <Dialog.Title fontSize={"24px"}>{title}</Dialog.Title>
             </Dialog.Header>
+
             <Dialog.Body maxH="70vh" overflowY="auto" px={6} py={4}>
-              {children}
+              {isValidElement(children)
+                ? cloneElement(children, { onClose })
+                : children}
             </Dialog.Body>
+
             <Dialog.Footer>
               {!hideFooter &&
                 (footer ? (
@@ -57,8 +65,9 @@ const Modal = ({
                   </>
                 ))}
             </Dialog.Footer>
+
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="sm" />
+              <CloseButton size="xl" />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>
@@ -66,4 +75,5 @@ const Modal = ({
     </Dialog.Root>
   );
 };
+
 export default Modal;

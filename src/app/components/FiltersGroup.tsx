@@ -1,35 +1,68 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { Button, HStack, Box, useBreakpointValue } from "@chakra-ui/react";
 import type { FilterItem } from "../types/types";
 
-type FiltersItemProps<T> = {
+type FiltersGroupProps<T> = {
   items: FilterItem<T>[];
   onItemSelect: (value: T) => void;
   selectedItem: T;
 };
 
-function FiltersItem<T>({
+const FiltersGroup = <T,>({
   items,
   onItemSelect,
   selectedItem,
-}: FiltersItemProps<T>) {
+}: FiltersGroupProps<T>) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  if (isMobile) {
+    return (
+      <Box
+        w="100%"
+        overflowX="auto"
+        overflowY="hidden"
+        css={{
+          "&::-webkit-scrollbar": { display: "none" },
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+        }}
+      >
+        <HStack gap="2" py="2" px="1" w="max-content">
+          {items?.map((item) => {
+            const isSelected = selectedItem === item.value;
+            return (
+              <Button
+                key={String(item.value)}
+                variant={isSelected ? "solid" : "subtle"}
+                size="sm"
+                onClick={() => onItemSelect(item.value)}
+                whiteSpace="nowrap"
+                flexShrink={0}
+              >
+                {item.label}
+              </Button>
+            );
+          })}
+        </HStack>
+      </Box>
+    );
+  }
+
   return (
-    <HStack wrap="wrap">
+    <HStack wrap="wrap" gap="2" py="2">
       {items?.map((item) => {
-        const { value } = item;
-        const isSelected = selectedItem === value;
+        const isSelected = selectedItem === item.value;
         return (
           <Button
-            key={String(value)}
+            key={String(item.value)}
             variant={isSelected ? "solid" : "subtle"}
             size="md"
-            onClick={() => onItemSelect(value)}
+            onClick={() => onItemSelect(item.value)}
           >
-            {item?.label}
+            {item.label}
           </Button>
         );
       })}
     </HStack>
   );
-}
+};
 
-export default FiltersItem;
+export default FiltersGroup;

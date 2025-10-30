@@ -20,12 +20,13 @@ const SelectField = ({
         onChange(e.value);
       }}
       value={value}
-      borderRadius="lg"
     >
       <Select.HiddenSelect />
-      <Select.Label>{label}</Select.Label>
+      <Select.Label fontSize={"12px"} fontWeight={400}>
+        {label}
+      </Select.Label>
       <Select.Control>
-        <Select.Trigger>
+        <Select.Trigger borderRadius="lg" borderColor={"#B0B0B0"}>
           {!!CustomSelectedValue ? (
             CustomSelectedValue
           ) : (

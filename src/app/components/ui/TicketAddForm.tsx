@@ -1,18 +1,16 @@
 import SelectField from "../common/form/SelectField";
 import TextAreaField from "../common/form/TextAreaField";
-import InputField from "../common/form/InputField";
 import CheckboxField from "../common/form/CheckboxField";
 import UploadFileField from "../common/form/UploadFileField";
-import PharmacyCode from "./PharmacyCode";
-import { useCallback, useState, useEffect } from "react";
+import InfoBadge from "./InfoBadge";
+import { useCallback, useState } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
 import { usePharmaciesOptions } from "@/app/hooks/usePharmaciesOptions";
 import {
   HStack,
   Text,
   Badge,
-  Grid,
-  GridItem,
+  Flex,
   Box,
   VStack,
   Button,
@@ -22,7 +20,7 @@ import InfoBlock from "./InfoBlock";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { useTicketsStore } from "@/app/useTicketsStore";
 
-const TicketAddForm = () => {
+const TicketAddForm = ({ onClose }) => {
   const { tickets, priorities, prioritiesList, categoriesList } =
     useTicketsStore();
   const initialData = {
@@ -30,7 +28,7 @@ const TicketAddForm = () => {
     category: [],
     guarantee: false,
     topic: "",
-    priority: [],
+    priority: ["pr_3"],
     description: "",
     files: [],
   };
@@ -43,21 +41,21 @@ const TicketAddForm = () => {
   }, []);
   const handleSubmit = () => {
     console.log("Создана заявка:", data);
-    if (onClose) onClose();
-    setData(initialData);
-  };
-  const handleCancel = () => {
     setData(initialData);
     if (onClose) onClose();
   };
 
+  const handleCancel = () => {
+    setData(initialData);
+    if (onClose) onClose();
+  };
   const getPharmacySelectedValue = (pharmacyId, tickets) => {
     const pharmacy = tickets.find((t) => t.id === Number(pharmacyId));
     if (!pharmacy) return null;
 
     return (
       <HStack>
-        <PharmacyCode pharmacyCode={pharmacy.pharmacyCode} />
+        <InfoBadge info={pharmacy.pharmacyCode} />
         <Text>{pharmacy.pharmacyName}</Text>
       </HStack>
     );
@@ -79,72 +77,64 @@ const TicketAddForm = () => {
     data.category.length > 0 ? categoryInfoByType[data.category[0]] : undefined;
   return (
     <Box mt={2}>
-      <Grid
-        templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-        gap={8}
-        alignItems="start"
-      >
-        <GridItem w="full">
-          <VStack align="stretch" gap={11}>
+      <Flex direction={{ base: "column", md: "row" }} gap={8} align="start">
+        <VStack align="stretch" gap={11} flex="1">
+          <SelectField
+            label={"Аптека"}
+            placeholder={"Выберите аптеку от которой исходит заявка"}
+            options={pharmaciesOptions}
+            value={data.pharmacy}
+            onChange={(value) => handleChange("pharmacy", value)}
+            size={"lg"}
+            CustomSelectedValue={
+              data.pharmacy[0]
+                ? getPharmacySelectedValue(data.pharmacy[0], tickets)
+                : null
+            }
+            CustomIndicator={data.pharmacy[0] ? <div>{indicator}</div> : null}
+          />
+          <VStack gap={4} align="stretch">
             <SelectField
-              label={"Аптека"}
-              placeholder={"Выберите аптеку от которой исходит заявка"}
-              options={pharmaciesOptions}
-              value={data.pharmacy}
-              onChange={(value) => handleChange("pharmacy", value)}
-              size={"lg"}
-              CustomSelectedValue={
-                data.pharmacy[0]
-                  ? getPharmacySelectedValue(data.pharmacy[0], tickets)
-                  : null
-              }
-              CustomIndicator={data.pharmacy[0] ? <div>{indicator}</div> : null}
+              label={"Категория заявки"}
+              placeholder={"Холодильники, кондиционеры или другое}"}
+              options={categoriesOptions}
+              value={data.category}
+              size={"md"}
+              onChange={(value) => handleChange("category", value)}
             />
-            <VStack gap={4} align="stretch">
-              <SelectField
-                label={"Категория заявки"}
-                placeholder={"Холодильники, кондиционеры или другое}"}
-                options={categoriesOptions}
-                value={data.category}
-                size={"md"}
-                onChange={(value) => handleChange("category", value)}
-              />
-              <CheckboxField
-                label={"Гарантийный случай?"}
-                value={data.guarantee}
-                onChange={(value) => handleChange("guarantee", value)}
-              />
-            </VStack>
-            <HStack align="start" mt={2}>
-              {info && (
-                <HStack align="start" mt={2}>
-                  <InfoBlock
-                    type="warning"
-                    title={info.warning.title}
-                    list={info.warning.list}
-                  />
-                  <InfoBlock
-                    type="danger"
-                    title={info.danger.title}
-                    list={info.danger.list}
-                  />
-                </HStack>
-              )}
-            </HStack>
+            <CheckboxField
+              label={"Гарантийный случай?"}
+              value={data.guarantee}
+              onChange={(value) => handleChange("guarantee", value)}
+            />
+            {info && (
+              <HStack align="start" flexWrap="wrap">
+                <InfoBlock
+                  type="warning"
+                  title={info.warning.title}
+                  list={info.warning.list}
+                />
+                <InfoBlock
+                  type="danger"
+                  title={info.danger.title}
+                  list={info.danger.list}
+                />
+              </HStack>
+            )}
           </VStack>
-        </GridItem>
-        <GridItem w="full">
-          <InputField
+        </VStack>
+        <VStack align="stretch" gap={4} flex="1">
+          <TextAreaField
             label={"Тема заявки"}
             placeholder={
               "Дайте заявке краткое название: например, сломался холодильник или не работает кондиционер"
             }
             value={data.topic}
             onChange={(value) => handleChange("topic", value)}
+            rows={3}
           />
           <SelectField
             label={"Приоритет"}
-            // placeholder={123}
             options={prioritiesOptions}
             value={data.priority}
             onChange={(value) => handleChange("priority", value)}
@@ -159,6 +149,7 @@ const TicketAddForm = () => {
             onChange={(value) => handleChange("description", value)}
             label={"Описание проблемы"}
             placeholder={`Кратко опишите проблему:\n \n• что случилось?\n• дата и время произошедшего?\n• сколько длится проблема?\n• насколько она влияет на вашу работу? `}
+            rows={7}
           />
           <UploadFileField
             label={"Прикрепите файлы"}
@@ -166,14 +157,14 @@ const TicketAddForm = () => {
             value={data.files}
             onChange={(value) => handleChange("files", value)}
           />
-        </GridItem>
-        <HStack>
-          <Button variant="outline" onClick={handleCancel}>
-            Отмена
-          </Button>
-          <Button onClick={handleSubmit}>Создать заявку</Button>
-        </HStack>
-      </Grid>
+        </VStack>
+      </Flex>
+      <HStack>
+        <Button onClick={handleSubmit}>Создать заявку</Button>
+        <Button variant="outline" onClick={handleCancel}>
+          Отмена
+        </Button>
+      </HStack>
     </Box>
   );
 };

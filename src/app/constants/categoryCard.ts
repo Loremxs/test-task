@@ -1,6 +1,5 @@
-const categoryInfoTitleWarning = "Заявка нужна, если:";
-const categoryInfoTitleDanger = "Заявку создавать не нужно, если:";
-
+const categoryInfoTitleWarning = "⚠️ Заявка нужна, если:";
+const categoryInfoTitleDanger = "❌ Заявку создавать не нужно, если:";
 export const categoryInfoByType = {
   cat_001: {
     warning: {

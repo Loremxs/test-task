@@ -12,8 +12,8 @@ const TicketModal = () => {
   );
   const footer = (
     <HStack>
-      <Button variant="outline">Отмена</Button>
       <Button>Создать заявку</Button>
+      <Button variant="outline">Отмена</Button>
     </HStack>
   );
 
@@ -24,7 +24,7 @@ const TicketModal = () => {
       footer={footer}
       hideFooter
     >
-      <TicketAddForm onClose={() => setOpen(false)} />
+      <TicketAddForm />
     </Modal>
   );
 };
