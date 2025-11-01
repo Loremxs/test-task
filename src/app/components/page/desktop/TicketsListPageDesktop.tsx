@@ -6,7 +6,7 @@ import TicketsTable from "../../ui/TicketsTable";
 import SearchInput from "../../ui/SearchInput";
 import { statusesConfig } from "../../../constants/statuses";
 import { useFilterTickets } from "../../../hooks/useFilterTickets";
-import TicketsModal from "../../ui/TicketsModal";
+import TicketsModal from "../../ui/TicketModal";
 import PDFExportButton from "../../ui/PDFExportButton";
 import OnlyMyTicketsFilter from "../../ui/OnlyMyTicketsFilter";
 import { useTicketsPageStore } from "@/app/hooks/useTicketsPageStore";

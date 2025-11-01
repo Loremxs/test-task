@@ -19,7 +19,7 @@ const MobileSearchBar: React.FC<MobileSearchBarProps> = ({
   };
 
   return (
-    <Box position="fixed" bottom="16px" right="16px" zIndex="100">
+    <Box position="fixed" bottom="60px" right="16px" zIndex="100">
       {isSearching ? (
         <HStack
           bg="white"

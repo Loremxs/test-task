@@ -1,6 +1,7 @@
 import { Checkbox } from "@chakra-ui/react";
-
+import { useBreakpointValue } from "@chakra-ui/react";
 const CheckboxField = ({ label, value, onChange }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   return (
     <Checkbox.Root
       checked={value}
@@ -8,7 +9,9 @@ const CheckboxField = ({ label, value, onChange }) => {
     >
       <Checkbox.HiddenInput />
       <Checkbox.Control borderRadius="5px" />
-      <Checkbox.Label fontWeight={400}>{label}</Checkbox.Label>
+      <Checkbox.Label fontWeight={400} fontSize={isMobile ? "12px" : "14px"}>
+        {label}
+      </Checkbox.Label>
     </Checkbox.Root>
   );
 };

@@ -3,7 +3,7 @@ import TextAreaField from "../common/form/TextAreaField";
 import CheckboxField from "../common/form/CheckboxField";
 import UploadFileField from "../common/form/UploadFileField";
 import InfoBadge from "./InfoBadge";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
 import { usePharmaciesOptions } from "@/app/hooks/usePharmaciesOptions";
 import {
@@ -20,20 +20,9 @@ import InfoBlock from "./InfoBlock";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { useTicketsStore } from "@/app/useTicketsStore";
 
-const TicketAddForm = ({ onClose }) => {
+const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
   const { tickets, priorities, prioritiesList, categoriesList } =
     useTicketsStore();
-  const initialData = {
-    pharmacy: [],
-    category: [],
-    guarantee: false,
-    topic: "",
-    priority: ["pr_3"],
-    description: "",
-    files: [],
-  };
-  const [data, setData] = useState(initialData);
-
   const handleChange = useCallback((key, value) => {
     setData((prevState) => {
       return { ...prevState, [key]: value };
@@ -169,4 +158,4 @@ const TicketAddForm = ({ onClose }) => {
   );
 };
 
-export default TicketAddForm;
+export default TicketAddFormDesktop;

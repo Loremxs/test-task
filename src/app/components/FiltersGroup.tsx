@@ -1,5 +1,5 @@
 import { Button, HStack, Box, useBreakpointValue } from "@chakra-ui/react";
-import '../styles/FiltersGroup.css'
+import "../styles/FiltersGroup.css";
 import type { FilterItem } from "../types/types";
 
 type FiltersGroupProps<T> = {
@@ -17,24 +17,24 @@ const FiltersGroup = <T,>({
 
   return (
     <HStack
-      wrap={isMobile ? undefined :'wrap'}
-      overflowX={isMobile ? 'auto' : undefined}
+      wrap={isMobile ? undefined : "wrap"}
+      overflowX={isMobile ? "auto" : undefined}
       gap="2"
       py="2"
-      className={'filters-group-container'}
+      className={"filters-group-container"}
     >
       {items?.map((item) => {
         const isSelected = selectedItem === item.value;
 
         if (item.CustomComponent) {
-          return item.CustomComponent
+          return item.CustomComponent;
         }
 
         return (
           <Button
             key={String(item.value)}
             variant={isSelected ? "solid" : "subtle"}
-            size={isMobile ? 'sm' : 'md'}
+            size={isMobile ? "sm" : "md"}
             onClick={() => onItemSelect(item.value)}
           >
             {item.label}

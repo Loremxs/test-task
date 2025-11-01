@@ -9,11 +9,11 @@ import { statusesConfig } from "@/app/constants/statuses";
 import { statuses } from "@/app/api/statuses";
 import type { TStatus } from "@/app/types/types";
 import type { FilterItem } from "@/app/types/types";
-import { HStack, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import OnlyMyTicketsFilter from "../../ui/OnlyMyTicketsFilter";
 import TicketsCard from "../../ui/TicketsCard";
 import MobileSearchBar from "../../ui/MobileSearchBar";
-
+import TicketModal from "../../ui/TicketModal";
 const TicketsListPageMobile = () => {
   const { priorities } = usePrioritiesStore();
   const { categories } = useCategoriesStore();
@@ -34,18 +34,17 @@ const TicketsListPageMobile = () => {
     }));
     return [
       {
-        CustomComponent: (
-          <OnlyMyTicketsFilter />
-        )
+        CustomComponent: <OnlyMyTicketsFilter />,
       },
       { value: null, label: "Все статусы" },
-      ...baseStatuses
+      ...baseStatuses,
     ];
   }, []);
 
   const handleSelectStatus = useCallback((value: TStatus | null) => {
     setStatusFilter(value);
   }, []);
+
   return (
     <Stack>
       <FiltersGroup
@@ -53,15 +52,7 @@ const TicketsListPageMobile = () => {
         selectedItem={statusFilter}
         onItemSelect={handleSelectStatus}
       />
-      {/*<HStack style={{ overflow: 'scroll' }}>*/}
-      {/*  <OnlyMyTicketsFilter /> /!*заглушка *!/*/}
-      {/*  <FiltersGroup*/}
-      {/*    items={statusesFilterList}*/}
-      {/*    selectedItem={statusFilter}*/}
-      {/*    onItemSelect={handleSelectStatus}*/}
-      {/*  />*/}
-      {/*</HStack>*/}
-      <Stack p={'10px'}>
+      <Stack p={"10px"}>
         {filteredTickets.map((ticket) => {
           const priority = priorities[ticket.priority];
           return (
@@ -69,7 +60,10 @@ const TicketsListPageMobile = () => {
           );
         })}
       </Stack>
-      <MobileSearchBar value={search} onChange={setSearch} />
+      <Stack>
+        <MobileSearchBar value={search} onChange={setSearch} />
+        <TicketModal />
+      </Stack>
     </Stack>
   );
 };

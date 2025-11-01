@@ -44,7 +44,7 @@ const Priority: React.FC<PriorityProps> = ({
       <Icon as={icon} color={color} boxSize={4} />
       {!hideText && (
         <HStack>
-          <Text>{priority.name}</Text>
+          <Text>{priority.name}:</Text>
           {showAdditionalInfo && (
             <Text color="gray.500" fontSize="sm">
               {additionalInfoByPriorityId[priority._id]}

@@ -1,5 +1,11 @@
 "use client";
-import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react";
+import {
+  Button,
+  CloseButton,
+  Dialog,
+  Portal,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { useState, ReactNode, cloneElement, isValidElement } from "react";
 
 type ModalProps = {
@@ -20,6 +26,7 @@ const Modal = ({
   hideFooter,
 }: ModalProps) => {
   const [open, setOpen] = useState(false);
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const handleChange = (e: { open: boolean }) => {
     setOpen(e.open);
@@ -34,24 +41,34 @@ const Modal = ({
 
       <Portal>
         <Dialog.Backdrop />
-        <Dialog.Positioner>
+        <Dialog.Positioner
+          display="flex"
+          alignItems={isMobile ? "stretch" : "center"}
+          justifyContent="center"
+        >
           <Dialog.Content
-            maxW="1007px"
             w="full"
+            maxW={isMobile ? "100%" : "1007px"}
+            h={isMobile ? "100dvh" : "auto"}
             bg="white"
-            borderRadius="15px"
+            borderRadius={isMobile ? "0px" : "15px"}
             overflow="hidden"
           >
-            <Dialog.Header>
-              <Dialog.Title fontSize={"24px"}>{title}</Dialog.Title>
-            </Dialog.Header>
-
-            <Dialog.Body maxH="70vh" overflowY="auto" px={6} py={4}>
+            {!isMobile && (
+              <Dialog.Header>
+                <Dialog.Title fontSize="24px">{title}</Dialog.Title>
+              </Dialog.Header>
+            )}
+            <Dialog.Body
+              h={isMobile ? "full" : "70vh"}
+              overflowY="auto"
+              px={isMobile ? 0 : 6}
+              py={4}
+            >
               {isValidElement(children)
                 ? cloneElement(children, { onClose })
                 : children}
             </Dialog.Body>
-
             <Dialog.Footer>
               {!hideFooter &&
                 (footer ? (
@@ -65,9 +82,8 @@ const Modal = ({
                   </>
                 ))}
             </Dialog.Footer>
-
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="xl" />
+              {!isMobile && <CloseButton />}
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>

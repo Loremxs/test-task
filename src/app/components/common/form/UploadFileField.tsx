@@ -1,16 +1,16 @@
 import { useRef, useCallback } from "react";
-import { Box, FileUpload, Icon } from "@chakra-ui/react";
+import { Box, FileUpload, Icon, Button } from "@chakra-ui/react";
 import { CiImageOn } from "react-icons/ci";
 import CustomFileUploadList from "../../ui/CustomFileUploadList";
-
+import { useBreakpointValue } from "@chakra-ui/react";
+import { FiPlus } from "react-icons/fi";
 const UploadFileField = ({ label, placeholder, value = [], onChange }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const inputRef = useRef(null);
-
   const handleFileChange = useCallback(
     (e) => {
       const newFiles = Array.from(e.acceptedFiles || []);
       onChange([...value, ...newFiles]);
-      // странная хуйня показать роме
       if (inputRef.current) {
         inputRef.current.value = "";
       }
@@ -25,7 +25,22 @@ const UploadFileField = ({ label, placeholder, value = [], onChange }) => {
     [onChange, value]
   );
 
-  return (
+  return isMobile ? (
+    <FileUpload.Root
+      alignItems="stretch"
+      onFileChange={handleFileChange}
+      key={value.length}
+    >
+      <CustomFileUploadList files={value} onRemove={handleRemove} />
+      <FileUpload.HiddenInput ref={inputRef} key={value.length} />
+
+      <FileUpload.Trigger asChild>
+        <Button w="full" variant="solid" size="md">
+          <FiPlus /> Прикрепить файлы
+        </Button>
+      </FileUpload.Trigger>
+    </FileUpload.Root>
+  ) : (
     <FileUpload.Root
       alignItems="stretch"
       maxFiles={10}
