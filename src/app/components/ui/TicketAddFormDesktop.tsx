@@ -2,24 +2,15 @@ import SelectField from "../common/form/SelectField";
 import TextAreaField from "../common/form/TextAreaField";
 import CheckboxField from "../common/form/CheckboxField";
 import UploadFileField from "../common/form/UploadFileField";
-import InfoBadge from "./InfoBadge";
 import { useCallback } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
 import { usePharmaciesOptions } from "@/app/hooks/usePharmaciesOptions";
-import {
-  HStack,
-  Text,
-  Badge,
-  Flex,
-  Box,
-  VStack,
-  Button,
-} from "@chakra-ui/react";
-import PriorityInfo from "./PriorityInfo";
+import { HStack, Badge, Flex, Box, VStack, Button } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { useTicketsStore } from "@/app/useTicketsStore";
-import type { TicketAddFormDesktopProps } from "@/app/types/forms";
+import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";
+import { usePrioritySelectedValue } from "@/app/hooks/usePrioritySelectedValue";
 
 const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
   const { tickets, priorities, prioritiesList, categoriesList } =
@@ -39,25 +30,12 @@ const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
     setData(initialData);
     if (onClose) onClose();
   };
-  const getPharmacySelectedValue = (pharmacyId, tickets) => {
-    const pharmacy = tickets.find((t) => t.id === Number(pharmacyId));
-    if (!pharmacy) return null;
-
-    return (
-      <HStack>
-        <InfoBadge info={pharmacy.pharmacyCode} />
-        <Text>{pharmacy.pharmacyName}</Text>
-      </HStack>
-    );
-  }; // custom hook
-  const getPrioritySelectedValue = (id) => {
-    const priority = priorities[id];
-    if (!priority) return null;
-    return <PriorityInfo priority={priority} showAdditionalInfo />;
-  }; // custom hook
   const prioritiesOptions = useOptions(prioritiesList);
   const categoriesOptions = useOptions(categoriesList);
   const pharmaciesOptions = usePharmaciesOptions(tickets);
+  const getPharmacySelectedValue = usePharmacySelectedValue(tickets);
+  const getPrioritySelectedValue = usePrioritySelectedValue(priorities);
+
   const indicator = (
     <Badge variant="outline" size={"md"}>
       Изменить

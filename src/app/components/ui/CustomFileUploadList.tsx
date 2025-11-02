@@ -7,13 +7,14 @@ import {
   CloseButton,
 } from "@chakra-ui/react";
 import { AiOutlineFile } from "react-icons/ai";
+import { useBreakpointValue } from "@chakra-ui/react";
 
 type CustomFileUploadListProps = {
   files: File[];
   onRemove?: (index: number) => void;
 };
 
-const getFileIconOrPreview = (file: File) => {
+const getFileIconOrPreview = (file: File, isMobile: boolean) => {
   const ext = file.name.split(".").pop()?.toLowerCase();
 
   if (
@@ -30,6 +31,8 @@ const getFileIconOrPreview = (file: File) => {
         boxSize="24px"
         objectFit="cover"
         borderRadius="md"
+        width={isMobile ? "60px" : "24px"}
+        height={isMobile ? "40px" : "16px"}
       />
     );
   }
@@ -42,17 +45,20 @@ const getFileIconOrPreview = (file: File) => {
         border="1px solid"
         borderColor="red.500"
         fontWeight="bold"
-        fontSize="12px"
-        px={2}
-        py={1}
+        fontSize={isMobile ? "14px" : "8px"}
+        width={isMobile ? "60px" : "24px"}
+        height={isMobile ? "40px" : "16px"}
         borderRadius="sm"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
       >
         PDF
       </Box>
     );
   }
 
-  return <AiOutlineFile size={16} color="gray" />;
+  return <AiOutlineFile size={20} color="gray" />;
 };
 
 const CustomFileUploadList: React.FC<CustomFileUploadListProps> = ({
@@ -60,7 +66,7 @@ const CustomFileUploadList: React.FC<CustomFileUploadListProps> = ({
   onRemove,
 }) => {
   if (!files.length) return null;
-
+  const isMobile = useBreakpointValue({ base: true, md: false });
   return (
     <VStack align="stretch" gap={1}>
       {files.map((file, index) => (
@@ -72,10 +78,11 @@ const CustomFileUploadList: React.FC<CustomFileUploadListProps> = ({
           rounded="4px"
           pl={1}
           justify="space-between"
-          h={"32px"}
+          h={isMobile ? "60px" : "32px"}
+          mx={4}
         >
           <HStack>
-            {getFileIconOrPreview(file)}
+            {getFileIconOrPreview(file, !!isMobile)}
             <Text fontSize="12px" color="gray.800">
               {file.name}
             </Text>

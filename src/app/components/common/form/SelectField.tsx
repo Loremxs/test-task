@@ -1,6 +1,7 @@
 "use client";
 import { Select } from "@chakra-ui/react";
 import type { SelectFieldProps } from "@/app/types/forms";
+import { useBreakpointValue } from "@chakra-ui/react";
 const SelectField = <T,>({
   label,
   placeholder,
@@ -11,6 +12,8 @@ const SelectField = <T,>({
   CustomSelectedValue,
   CustomIndicator,
 }: SelectFieldProps<T>) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
     <Select.Root
       collection={options}
@@ -33,7 +36,10 @@ const SelectField = <T,>({
           {!!CustomSelectedValue ? (
             CustomSelectedValue
           ) : (
-            <Select.ValueText placeholder={placeholder} />
+            <Select.ValueText
+              placeholder={placeholder}
+              fontSize={isMobile ? "12px" : "14px"}
+            />
           )}
         </Select.Trigger>
         <Select.IndicatorGroup>

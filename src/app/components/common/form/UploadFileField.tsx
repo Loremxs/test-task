@@ -64,6 +64,7 @@ const UploadFileField: React.FC<UploadFileFieldProps> = ({
             mx={"10px"}
             mb={"10px"}
             style={{ width: "calc(100% - 20px)" }}
+            disabled={value.length >= 3 ? true : false}
           >
             <FiPlus /> Прикрепить файлы
           </Button>

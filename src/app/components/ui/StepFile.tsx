@@ -1,4 +1,4 @@
-import { VStack, Box, Flex } from "@chakra-ui/react";
+import { VStack, Box } from "@chakra-ui/react";
 import UploadFileField from "../common/form/UploadFileField";
 import HeaderModalMobile from "./HeaderModalMobile";
 import React from "react";

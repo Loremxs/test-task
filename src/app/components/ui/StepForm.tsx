@@ -1,27 +1,27 @@
 import SelectField from "../common/form/SelectField";
 import TextAreaField from "../common/form/TextAreaField";
 import CheckboxField from "../common/form/CheckboxField";
-import InfoBadge from "./InfoBadge";
 import { useCallback } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
 import { usePharmaciesOptions } from "@/app/hooks/usePharmaciesOptions";
 import {
   HStack,
-  Text,
   Badge,
   Flex,
   Box,
   VStack,
   Button,
   Circle,
+  Text,
 } from "@chakra-ui/react";
-import PriorityInfo from "./PriorityInfo";
 import { useTicketsStore } from "@/app/useTicketsStore";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { CiFolderOn } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { BsQuestionCircle } from "react-icons/bs";
 import HeaderModalMobile from "./HeaderModalMobile";
+import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";
+import { usePrioritySelectedValue } from "@/app/hooks/usePrioritySelectedValue";
 
 const StepForm = ({
   onClose,
@@ -43,24 +43,8 @@ const StepForm = ({
     setData(initialData);
     onClose?.();
   };
-
-  const getPharmacySelectedValue = (pharmacyId, tickets) => {
-    const pharmacy = tickets.find((t) => t.id === Number(pharmacyId));
-    if (!pharmacy) return null;
-    return (
-      <HStack>
-        <InfoBadge info={pharmacy.pharmacyCode} />
-        <Text>{pharmacy.pharmacyName}</Text>
-      </HStack>
-    );
-  };
-
-  const getPrioritySelectedValue = (id) => {
-    const priority = priorities[id];
-    if (!priority) return null;
-    return <PriorityInfo priority={priority} showAdditionalInfo />;
-  };
-
+  const getPharmacySelectedValue = usePharmacySelectedValue(tickets);
+  const getPrioritySelectedValue = usePrioritySelectedValue(priorities);
   const prioritiesOptions = useOptions(prioritiesList);
   const categoriesOptions = useOptions(categoriesList);
   const pharmaciesOptions = usePharmaciesOptions(tickets);
@@ -79,7 +63,7 @@ const StepForm = ({
   return (
     <>
       <HeaderModalMobile title="Создание заявки" onClose={onClose} />
-      <Box mt={1} px={3}>
+      <Box mt={1} px={3} pb={"100px"}>
         <Flex direction="column" gap={6}>
           <SelectField
             label="Аптека"
@@ -112,17 +96,18 @@ const StepForm = ({
                 onChange={(value) => handleChange("guarantee", value)}
               />
               {isSelectedCategory && (
-                <Button
+                <HStack
+                  as="button"
                   onClick={() => onShowInfo(info)}
-                  variant="plain"
-                  fontWeight="medium"
+                  gap={1}
                   color="#440AF1"
-                  fontSize="12px"
-                  size={"sm"}
+                  cursor="pointer"
                 >
-                  <BsQuestionCircle />
-                  Проверьте себя
-                </Button>
+                  <BsQuestionCircle size={14} />
+                  <Text fontSize="sm" fontWeight="medium">
+                    Проверьте себя
+                  </Text>
+                </HStack>
               )}
             </HStack>
           </VStack>

@@ -1,0 +1,14 @@
+@media (max-width: 767px) {
+  .project-modal-content ::placeholder {
+    font-size: 12px;
+  }
+  .chakra-select__control button span {
+    font-size: 12px;
+  }
+  .checkbox-field span {
+    font-size: 12px;
+  }
+  .priority-info-block {
+    font-size: 12px;
+  }
+}

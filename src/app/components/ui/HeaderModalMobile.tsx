@@ -12,7 +12,7 @@ const HeaderModalMobile = ({ title, onClose }: HeaderModalMobileProps) => {
       <HStack align="center">
         <IconButton
           aria-label="Назад"
-          variant="ghost"
+          variant="plain"
           alignSelf="flex-start"
           onClick={onClose}
           ml={4}

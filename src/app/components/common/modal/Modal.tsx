@@ -7,6 +7,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { useState, type ReactNode, cloneElement, isValidElement } from "react";
+import "../../../styles/Modal.css";
 
 type ModalProps = {
   title: string;
@@ -61,6 +62,7 @@ const Modal = ({
             bg="white"
             borderRadius={isMobile ? "0px" : "15px"}
             overflow="hidden"
+            className="project-modal-content"
           >
             {!isMobile && (
               <Dialog.Header>
