@@ -1,11 +1,9 @@
-import { Flex, HStack, Link as ChakraLink, Spacer } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
+import { Flex, HStack, Spacer } from "@chakra-ui/react";
 import AvatarProfile from "../AvatarProfile";
 import ExitButton from "../ExitButton";
+import NavLink from "./NavLink";
 
 const Navbar = () => {
-  const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
   return (
     <Flex
       as="nav"
@@ -21,27 +19,18 @@ const Navbar = () => {
       zIndex="1000"
     >
       <HStack px={20}>
-        <ChakraLink as={Link} to="/" color={isActive ? "#1C1C1C" : "#B0B0B0"}>
-          Заявки
-        </ChakraLink>
-
-        <ChakraLink as={Link} to="/reports">
-          Отчёты
-        </ChakraLink>
-
-        <ChakraLink as={Link} to="/directory">
-          Справочники
-        </ChakraLink>
+        <NavLink to="/">Заявки</NavLink>
+        <NavLink to="/reports">Отчёты</NavLink>
+        <NavLink to="/directory">Справочники</NavLink>
       </HStack>
       <Spacer />
       <HStack>
-        <ChakraLink as={Link} to="/profile">
+        <NavLink to="/profile">
           <AvatarProfile />
-        </ChakraLink>
-
-        <ChakraLink as={Link} to="/exit">
+        </NavLink>
+        <NavLink to="/exit">
           <ExitButton />
-        </ChakraLink>
+        </NavLink>
       </HStack>
     </Flex>
   );

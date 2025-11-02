@@ -1,17 +1,17 @@
 import { useMemo } from "react";
-import type { TTicket, TStatus } from "@/app/types/types";
+import type { Ticket, Status } from "@/app/types/ticket";
 
 type UseFilterTicketsParams = {
   search: string;
-  statusFilter: TStatus | null;
-  tickets: TTicket[];
+  statusFilter: Ticket | null;
+  tickets: Status[];
 };
 
 export const useFilterTickets = ({
   search,
   statusFilter,
   tickets,
-}: UseFilterTicketsParams): TTicket[] => {
+}: UseFilterTicketsParams): Ticket[] => {
   return useMemo(() => {
     const ticketsFilteredByStatus = statusFilter
       ? tickets?.filter((item) => item?.status === statusFilter)

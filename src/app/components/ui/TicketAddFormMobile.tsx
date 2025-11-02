@@ -10,7 +10,7 @@ const TicketAddFormMobile = ({ onClose, data, setData, initialData }) => {
 
   const [info, setInfo] = useState(null);
   return (
-    <Box>
+    <Box flex={1} h={"100%"}>
       {currentPage === "form" && (
         <StepForm
           data={data}

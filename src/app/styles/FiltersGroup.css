@@ -1,13 +1,16 @@
 .filters-group-container {
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Chrome, Safari и Opera */
 .filters-group-container::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-    background: transparent;
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+.box-test {
+  width: calc(100% - 20px);
 }

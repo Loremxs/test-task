@@ -6,6 +6,8 @@ import { FiPlus } from "react-icons/fi";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { useState } from "react";
 const TicketModal = () => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   const initialData = {
     pharmacy: [],
     category: [],
@@ -16,7 +18,11 @@ const TicketModal = () => {
     files: [],
   };
   const [data, setData] = useState(initialData);
-  const isMobile = useBreakpointValue({ base: true, md: false });
+  const handleModalChange = (open: boolean) => {
+    if (!open) {
+      setData(initialData);
+    }
+  };
 
   const trigger = isMobile ? (
     <Box position="fixed" bottom="10px" right="16px" zIndex="200">
@@ -42,6 +48,7 @@ const TicketModal = () => {
       trigger={trigger}
       title={"Создание заявки"}
       footer={footer}
+      onOpenChange={handleModalChange}
       hideFooter
     >
       {isMobile ? (

@@ -13,7 +13,8 @@ import { useTicketsPageStore } from "@/app/hooks/useTicketsPageStore";
 import { useTicketsStore } from "@/app/useTicketsStore";
 import { usePrioritiesStore } from "@/app/usePrioritiesStore";
 import { useCategoriesStore } from "@/app/useCategoriesStore";
-import type { FilterItem, TStatus } from "@/app/types/types.ts";
+import type { FilterItem } from "@/app/types/common";
+import type { Status } from "@/app/types/ticket";
 
 const TicketsListPageDesktop = () => {
   const { priorities } = usePrioritiesStore();
@@ -27,11 +28,11 @@ const TicketsListPageDesktop = () => {
   }, []);
 
   const filteredTickets = useFilterTickets({ search, statusFilter, tickets });
-  const statusesFilterList = useMemo<FilterItem<TStatus | null>[]>(() => {
+  const statusesFilterList = useMemo<FilterItem<Status | null>[]>(() => {
     const baseStatuses = Object.keys(statuses).map((status) => ({
       key: "status",
-      value: status as TStatus,
-      label: statusesConfig[status as TStatus].localization,
+      value: status as Status,
+      label: statusesConfig[status as Status].localization,
     }));
     return [
       ...baseStatuses,
@@ -47,7 +48,7 @@ const TicketsListPageDesktop = () => {
     ];
   }, []);
 
-  const handleSelectStatus = useCallback((value: TStatus | null) => {
+  const handleSelectStatus = useCallback((value: Status | null) => {
     setStatusFilter(value);
   }, []);
 

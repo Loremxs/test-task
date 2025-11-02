@@ -1,5 +1,10 @@
 import { Text } from "@chakra-ui/react";
-const PharmacyName = ({ pharmacyName }) => {
+
+type PharmacyNameProps = {
+  pharmacyName: string;
+};
+
+const PharmacyName = ({ pharmacyName }: PharmacyNameProps) => {
   return <Text>{pharmacyName}</Text>;
 };
 

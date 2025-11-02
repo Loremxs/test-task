@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import type { TCategory } from "./types/types";
+import type { Category } from "./types/ticket";
 import { categories } from "./api/categories";
 
 type CategoriesState = {
-  categories: Record<string, TCategory>;
-  categoriesList: TCategory[];
+  categories: Record<string, Category>;
+  categoriesList: Category[];
   loadCategoriesMockData: () => void;
 };
 

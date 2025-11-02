@@ -1,6 +1,10 @@
 import { Badge } from "@chakra-ui/react";
 
-const InfoBadge = ({ info }) => {
+type InfoBadgeProps = {
+  info: string;
+};
+
+const InfoBadge = ({ info }: InfoBadgeProps) => {
   return <Badge variant="subtle">{info}</Badge>;
 };
 

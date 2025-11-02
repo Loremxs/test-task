@@ -1,8 +1,7 @@
 "use client";
-
 import { Select } from "@chakra-ui/react";
-
-const SelectField = ({
+import type { SelectFieldProps } from "@/app/types/forms";
+const SelectField = <T,>({
   label,
   placeholder,
   options,
@@ -11,7 +10,7 @@ const SelectField = ({
   onChange,
   CustomSelectedValue,
   CustomIndicator,
-}) => {
+}: SelectFieldProps<T>) => {
   return (
     <Select.Root
       collection={options}
@@ -22,11 +21,15 @@ const SelectField = ({
       value={value}
     >
       <Select.HiddenSelect />
-      <Select.Label fontSize={"12px"} fontWeight={400}>
+      <Select.Label fontSize="12px" fontWeight={400}>
         {label}
       </Select.Label>
       <Select.Control>
-        <Select.Trigger borderRadius="lg" borderColor={"#B0B0B0"}>
+        <Select.Trigger
+          borderRadius="lg"
+          borderColor="#B0B0B0"
+          cursor="pointer"
+        >
           {!!CustomSelectedValue ? (
             CustomSelectedValue
           ) : (

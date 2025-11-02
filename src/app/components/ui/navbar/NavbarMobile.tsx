@@ -11,6 +11,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import AvatarProfile from "../AvatarProfile";
 import { pagesMobile } from "@/app/constants/pagesMobile";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const NavbarMobile = () => {
   const location = useLocation();
@@ -29,14 +30,19 @@ const NavbarMobile = () => {
       borderBottom="1px solid"
       borderColor="#D9E1EC"
       position="sticky"
-      top="0"
       zIndex="1000"
       bg={"white"}
     >
       <MenuRoot>
         <MenuTrigger asChild>
-          <Button size="sm" variant="outline" fontWeight="medium">
+          <Button
+            size="sm"
+            variant="plain"
+            fontWeight="medium"
+            fontSize={"20px"}
+          >
             {currentPage}
+            <IoMdArrowDropdown />
           </Button>
         </MenuTrigger>
 

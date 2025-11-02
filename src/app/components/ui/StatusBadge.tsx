@@ -1,10 +1,10 @@
 import { Badge } from "@chakra-ui/react";
-import type { TStatus } from "@/app/types/types";
+import type { Status } from "@/app/types/ticket";
 import { statusesConfig } from "@/app/constants/statuses";
-import "./StatusBadge.css";
+import "../../styles/StatusBadge.css";
 
 type StatusProps = {
-  status: TStatus;
+  status: Status;
 };
 
 const StatusBadge: React.FC<StatusProps> = ({ status }) => {

@@ -1,6 +1,12 @@
 import { HStack, IconButton, Text, Box } from "@chakra-ui/react";
 import { IoMdArrowBack } from "react-icons/io";
-const HeaderModalMobile = ({ title, onClose }) => {
+
+type HeaderModalMobileProps = {
+  title: string;
+  onClose: () => void;
+};
+
+const HeaderModalMobile = ({ title, onClose }: HeaderModalMobileProps) => {
   return (
     <Box borderBottom="1px solid" borderColor="#DDDDDD">
       <HStack align="center">

@@ -15,10 +15,11 @@ import {
   VStack,
   Button,
 } from "@chakra-ui/react";
-import Priority from "./Priority";
+import PriorityInfo from "./PriorityInfo";
 import InfoBlock from "./InfoBlock";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { useTicketsStore } from "@/app/useTicketsStore";
+import type { TicketAddFormDesktopProps } from "@/app/types/forms";
 
 const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
   const { tickets, priorities, prioritiesList, categoriesList } =
@@ -52,7 +53,7 @@ const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
   const getPrioritySelectedValue = (id) => {
     const priority = priorities[id];
     if (!priority) return null;
-    return <Priority priority={priority} showAdditionalInfo />;
+    return <PriorityInfo priority={priority} showAdditionalInfo />;
   }; // custom hook
   const prioritiesOptions = useOptions(prioritiesList);
   const categoriesOptions = useOptions(categoriesList);

@@ -6,29 +6,31 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import type { TTicket } from "@/app/types/types";
+import type { Ticket } from "@/app/types/ticket";
 import CustomTable from "../common/table/CustomTable";
 import StatusBadge from "@/app/components/ui/StatusBadge";
-import Priority from "@/app/components/ui/Priority";
+import PriorityInfo from "@/app/components/ui/PriorityInfo";
 import Pharmacy from "@/app/components/ui/Pharmacy";
-import Category from "@/app/components/ui/Category";
+import CategoryInfo from "@/app/components/ui/CategoryInfo";
 import CreatedAtTime from "./CreatedAtTime";
+import TimerInfo from "./TimerInfo";
 import { Box } from "@chakra-ui/react";
+import { useMemo } from "react";
 
 type TicketsTableProps = {
-  tickets: TTicket[];
+  tickets: Ticket[];
   priorities: Record<string, any>;
   categories: Record<string, any>;
 };
 
-const columnHelper = createColumnHelper<TTicket>();
+const columnHelper = createColumnHelper<Ticket>();
 
 const TicketsTable: React.FC<TicketsTableProps> = ({
   tickets,
   priorities,
   categories,
 }) => {
-  const columns = React.useMemo(
+  const columns = useMemo(
     () => [
       columnHelper.accessor("number", {
         header: "№",
@@ -56,7 +58,7 @@ const TicketsTable: React.FC<TicketsTableProps> = ({
         header: "Приоритет",
         cell: (info) => {
           const t = info.row.original;
-          return <Priority priority={priorities[t.priority]} />;
+          return <PriorityInfo priority={priorities[t.priority]} />;
         },
       }),
       columnHelper.accessor("topic", {
@@ -67,12 +69,26 @@ const TicketsTable: React.FC<TicketsTableProps> = ({
         header: "Категория",
         cell: (info) => {
           const t = info.row.original;
-          return <Category category={categories[t.category]} />;
+          return <CategoryInfo category={categories[t.category]} />;
         },
       }),
       columnHelper.accessor("technician", { header: "Техник" }),
-      columnHelper.accessor("reaction", { header: "Реакция" }),
-      columnHelper.accessor("resolution", { header: "Решение" }),
+      columnHelper.display({
+        id: "reaction",
+        header: "Реакция",
+        cell: (info) => {
+          const t = info.row.original;
+          return <TimerInfo timer={t.reaction} />;
+        },
+      }),
+      columnHelper.display({
+        id: "resolution",
+        header: "Решение",
+        cell: (info) => {
+          const t = info.row.original;
+          return <TimerInfo timer={t.resolution} />;
+        },
+      }),
       columnHelper.accessor("status", {
         header: "Статус",
         cell: (info) => <StatusBadge status={info.getValue()} />,

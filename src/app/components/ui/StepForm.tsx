@@ -15,7 +15,7 @@ import {
   Button,
   Circle,
 } from "@chakra-ui/react";
-import Priority from "./Priority";
+import PriorityInfo from "./PriorityInfo";
 import { useTicketsStore } from "@/app/useTicketsStore";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { CiFolderOn } from "react-icons/ci";
@@ -58,7 +58,7 @@ const StepForm = ({
   const getPrioritySelectedValue = (id) => {
     const priority = priorities[id];
     if (!priority) return null;
-    return <Priority priority={priority} showAdditionalInfo />;
+    return <PriorityInfo priority={priority} showAdditionalInfo />;
   };
 
   const prioritiesOptions = useOptions(prioritiesList);
@@ -118,8 +118,9 @@ const StepForm = ({
                   fontWeight="medium"
                   color="#440AF1"
                   fontSize="12px"
-                  leftIcon={<BsQuestionCircle />}
+                  size={"sm"}
                 >
+                  <BsQuestionCircle />
                   Проверьте себя
                 </Button>
               )}
@@ -145,7 +146,6 @@ const StepForm = ({
                 : null
             }
           />
-
           <TextAreaField
             value={data.description}
             onChange={(value) => handleChange("description", value)}
@@ -153,26 +153,27 @@ const StepForm = ({
             placeholder={`Кратко опишите проблему:\n\n• что случилось?\n• дата и время произошедшего?\n• сколько длится проблема?\n• насколько она влияет на вашу работу?`}
             rows={6}
           />
-
-          <VStack gap={2} mt={2}>
-            {attachedFiles > 0 ? (
-              <Button onClick={onAttachFiles} w="full" variant="subtle">
-                <CiFolderOn />
-                Прикрепленые файлы:{" "}
-                <Circle bg="white" size="12px" outlineColor="bg">
-                  {attachedFiles}
-                </Circle>
+          <Box position="fixed" bottom={0} left={0} right={0} p={3}>
+            <VStack gap={2} mt={2}>
+              {attachedFiles > 0 ? (
+                <Button onClick={onAttachFiles} w="full" variant="subtle">
+                  <CiFolderOn />
+                  Прикрепленые файлы:
+                  <Circle bg="white" size="12px" outlineColor="bg">
+                    {attachedFiles}
+                  </Circle>
+                </Button>
+              ) : (
+                <Button onClick={onAttachFiles} w="full" variant="subtle">
+                  <FiPlus />
+                  Прикрепить файлы
+                </Button>
+              )}
+              <Button onClick={handleSubmit} w={"full"}>
+                Создать заявку
               </Button>
-            ) : (
-              <Button onClick={onAttachFiles} w="full" variant="subtle">
-                <FiPlus />
-                Прикрепить файлы
-              </Button>
-            )}
-            <Button onClick={handleSubmit} w={"full"}>
-              Создать заявку
-            </Button>
-          </VStack>
+            </VStack>
+          </Box>
         </Flex>
       </Box>
     </>

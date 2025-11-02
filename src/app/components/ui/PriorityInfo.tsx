@@ -2,15 +2,16 @@ import { HStack, Text, Icon } from "@chakra-ui/react";
 import { CgShapeRhombus } from "react-icons/cg";
 import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import type { TPriority } from "@/app/types/types";
+import type { Priority } from "@/app/types/ticket";
 import { additionalInfoByPriorityId } from "@/app/constants/additionalInfoByPriorityId";
+import { useBreakpointValue } from "@chakra-ui/react";
 
 type PriorityProps = {
-  priority: TPriority;
+  priority: Priority;
   showAdditionalInfo?: boolean;
   hideText?: boolean;
 };
-const Priority: React.FC<PriorityProps> = ({
+const PriorityInfo: React.FC<PriorityProps> = ({
   priority,
   showAdditionalInfo,
   hideText,
@@ -18,6 +19,8 @@ const Priority: React.FC<PriorityProps> = ({
   let icon;
   let color;
   const priorityId = priority._id;
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   switch (priorityId) {
     case "pr_1":
       icon = MdKeyboardDoubleArrowUp;
@@ -46,7 +49,7 @@ const Priority: React.FC<PriorityProps> = ({
         <HStack>
           <Text>{priority.name}:</Text>
           {showAdditionalInfo && (
-            <Text color="gray.500" fontSize="sm">
+            <Text color="gray.500" fontSize={isMobile ? "12px" : "14px"}>
               {additionalInfoByPriorityId[priority._id]}
             </Text>
           )}
@@ -56,4 +59,4 @@ const Priority: React.FC<PriorityProps> = ({
   );
 };
 
-export default Priority;
+export default PriorityInfo;

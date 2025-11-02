@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import type { TPriority } from "./types/types";
+import type { Priority } from "./types/ticket";
 import { priorities } from "./api/priorities";
 
 type PrioritiesState = {
-  priorities: Record<string, TPriority>;
-  prioritiesList: TPriority[];
+  priorities: Record<string, Priority>;
+  prioritiesList: Priority[];
   loadPrioritiesMockData: () => void;
 };
 

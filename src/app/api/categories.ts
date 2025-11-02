@@ -1,4 +1,4 @@
-import type { TCategory } from "../types/types";
+import type { TCategory } from "../types/common";
 
 export const categories: TCategory[] = [
   { _id: "cat_001", name: "Кассы" },

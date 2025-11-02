@@ -1,12 +1,16 @@
-import { createListCollection } from "@chakra-ui/react";
+import { createListCollection, type ListCollection } from "@chakra-ui/react";
 import { useMemo } from "react";
+import type { OptionItem } from "../types/common";
 
-export const useOptions = (list) => {
+export const useOptions = (
+  list: { _id: string; name: string }[]
+): ListCollection<OptionItem> => {
   return useMemo(() => {
     return createListCollection({
-      items: list.map((item) => {
-        return { value: item._id, label: item.name };
-      }),
+      items: list.map((item) => ({
+        value: item._id,
+        label: item.name,
+      })),
     });
   }, [list]);
 };

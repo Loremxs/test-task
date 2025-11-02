@@ -1,4 +1,4 @@
-import type { TStatus } from "@/app/types/types";
+import type { TStatus } from "@/app/types/common";
 export const statusesConfig: Record<
   TStatus,
   { localization: string; color: string }

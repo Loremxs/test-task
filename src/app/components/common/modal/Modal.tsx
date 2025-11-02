@@ -6,7 +6,7 @@ import {
   Portal,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { useState, ReactNode, cloneElement, isValidElement } from "react";
+import { useState, type ReactNode, cloneElement, isValidElement } from "react";
 
 type ModalProps = {
   title: string;
@@ -33,10 +33,18 @@ const Modal = ({
     onOpenChange?.(e.open);
   };
 
-  const onClose = () => setOpen(false);
+  const onClose = () => {
+    setOpen(false);
+    onOpenChange?.(false);
+  };
 
   return (
-    <Dialog.Root lazyMount open={open} onOpenChange={handleChange}>
+    <Dialog.Root
+      lazyMount
+      open={open}
+      onOpenChange={handleChange}
+      size={isMobile ? "full" : "md"}
+    >
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
 
       <Portal>
@@ -59,12 +67,7 @@ const Modal = ({
                 <Dialog.Title fontSize="24px">{title}</Dialog.Title>
               </Dialog.Header>
             )}
-            <Dialog.Body
-              h={isMobile ? "full" : "70vh"}
-              overflowY="auto"
-              px={isMobile ? 0 : 6}
-              py={4}
-            >
+            <Dialog.Body overflowY="auto" px={isMobile ? 0 : 6} py={4}>
               {isValidElement(children)
                 ? cloneElement(children, { onClose })
                 : children}
