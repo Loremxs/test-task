@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { CiImageOn } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
-import CustomFileUploadList from "../../ui/CustomFileUploadList";
+import CustomFileUploadList from "./CustomFileUploadList";
 type UploadFileFieldProps = {
   label?: string;
   placeholder?: string;

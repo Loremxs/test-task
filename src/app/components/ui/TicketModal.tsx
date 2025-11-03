@@ -1,7 +1,7 @@
 import { Button, HStack, Box } from "@chakra-ui/react";
 import Modal from "../common/modal/Modal";
-import TicketAddFormDesktop from "./TicketAddFormDesktop";
-import TicketAddFormMobile from "./TicketAddFormMobile";
+import TicketAddFormDesktop from "./Desktop/TicketAddFormDesktop";
+import TicketAddFormMobile from "./Mobile/TicketAddFormMobile";
 import { FiPlus } from "react-icons/fi";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { useState } from "react";

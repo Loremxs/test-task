@@ -1,5 +1,5 @@
 import "./App.css";
-import NavbarContainer from "./components/ui/navbar/NavbarContainer";
+import NavbarContainer from "./components/ui/Navbar/NavbarContainer";
 import Directory from "./layouts/Directory";
 import Reports from "./layouts/Reports";
 import Profile from "./layouts/Profile";

@@ -1,7 +1,7 @@
 import { Flex, HStack, Spacer } from "@chakra-ui/react";
-import AvatarProfile from "../AvatarProfile";
-import ExitButton from "../ExitButton";
 import NavLink from "./NavLink";
+import AvatarProfile from "./AvatarProfile";
+import ExitButton from "./ExitButton";
 
 const Navbar = () => {
   return (

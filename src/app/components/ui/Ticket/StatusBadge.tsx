@@ -1,7 +1,7 @@
 import { Badge } from "@chakra-ui/react";
 import type { Status } from "@/app/types/ticket";
 import { statusesConfig } from "@/app/constants/statuses";
-import "../../styles/StatusBadge.css";
+import "../../../styles/StatusBadge.css";
 
 type StatusProps = {
   status: Status;

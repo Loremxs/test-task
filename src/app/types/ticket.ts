@@ -12,7 +12,10 @@ export type Category = {
   _id: string;
   name: string;
 };
-
+export type Pharmacy = {
+  _id: string;
+  name: string;
+};
 export type Ticket = {
   id: string | number;
   number: string;

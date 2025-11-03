@@ -1,6 +1,6 @@
 import { VStack, Box } from "@chakra-ui/react";
-import UploadFileField from "../common/form/UploadFileField";
-import HeaderModalMobile from "./HeaderModalMobile";
+import UploadFileField from "../../common/form/UploadFileField";
+import HeaderModalMobile from "../Mobile/HeaderModalMobile";
 import React from "react";
 
 type StepFilesProps = {

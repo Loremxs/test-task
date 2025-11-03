@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import PriorityInfo from "@/app/components/ui/PriorityInfo";
+import PriorityInfo from "@/app/components/ui/Ticket/PriorityInfo";
 import type { Priority } from "@/app/types/ticket";
 
 export const usePrioritySelectedValue = (

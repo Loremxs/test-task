@@ -1,4 +1,4 @@
-import FiltersGroup from "../../FiltersGroup";
+import FiltersGroup from "../../ui/FiltersGroup";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useTicketsPageStore } from "@/app/store/useTicketsPageStore";
 import { useTicketsStore } from "@/app/store/useTicketsStore";
@@ -10,9 +10,9 @@ import { statuses } from "@/app/api/statuses";
 import type { Status } from "@/app/types/ticket";
 import type { FilterItem } from "@/app/types/common";
 import { Stack, Text, Box } from "@chakra-ui/react";
-import OnlyMyTicketsFilter from "../../ui/OnlyMyTicketsFilter";
-import TicketsCard from "../../ui/TicketsCard";
-import MobileSearchBar from "../../ui/MobileSearchBar";
+import OnlyMyTicketsFilter from "../../ui/Buttons/OnlyMyTicketsFilter";
+import TicketsCard from "../../ui/Mobile/TicketsCard";
+import MobileSearchBar from "../../ui/Search/MobileSearchBar";
 import TicketModal from "../../ui/TicketModal";
 
 const TicketsListPageMobile = () => {

@@ -7,13 +7,13 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import type { Ticket } from "@/app/types/ticket";
-import CustomTable from "../common/table/CustomTable";
-import StatusBadge from "@/app/components/ui/StatusBadge";
-import PriorityInfo from "@/app/components/ui/PriorityInfo";
-import Pharmacy from "@/app/components/ui/Pharmacy";
-import CategoryInfo from "@/app/components/ui/CategoryInfo";
-import CreatedAtTime from "./CreatedAtTime";
-import TimerInfo from "./TimerInfo";
+import CustomTable from "../../common/table/CustomTable";
+import StatusBadge from "@/app/components/ui/Ticket/StatusBadge";
+import PriorityInfo from "@/app/components/ui/Ticket/PriorityInfo";
+import Pharmacy from "@/app/components/ui/Ticket/Pharmacy";
+import CategoryInfo from "@/app/components/ui/Ticket/CategoryInfo";
+import CreatedAtTime from "../Ticket/CreatedAtTime";
+import TimerInfo from "../Ticket/TimerInfo";
 import { Box } from "@chakra-ui/react";
 import { useMemo } from "react";
 

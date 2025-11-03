@@ -9,7 +9,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import AvatarProfile from "../AvatarProfile";
+import AvatarProfile from "./AvatarProfile";
 import { pagesMobile } from "@/app/constants/pagesMobile";
 import { IoMdArrowDropdown } from "react-icons/io";
 

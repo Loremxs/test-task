@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Box } from "@chakra-ui/react";
-import StepForm from "./StepForm";
-import StepFiles from "./StepFile";
-import StepInfo from "./StepInfo";
+import StepForm from "../StepsMobile/StepForm";
+import StepFiles from "../StepsMobile/StepFile";
+import StepInfo from "../StepsMobile/StepInfo";
 import type { TicketFormBaseProps } from "@/app/types/forms";
 type TicketAddFormMobileProps = TicketFormBaseProps;
 

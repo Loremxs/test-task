@@ -1,8 +1,8 @@
 import { Card, Heading, HStack, Stack, Text, Spacer } from "@chakra-ui/react";
-import StatusBadge from "./StatusBadge";
-import PriorityInfo from "./PriorityInfo";
-import InfoBadge from "./InfoBadge";
-import TimerInfo from "./TimerInfo";
+import StatusBadge from "../Ticket/StatusBadge";
+import PriorityInfo from "../Ticket/PriorityInfo";
+import InfoBadge from "../Ticket/InfoBadge";
+import TimerInfo from "../Ticket/TimerInfo";
 import type { Ticket, Priority } from "@/app/types/ticket";
 
 type TicketsCardProps = {

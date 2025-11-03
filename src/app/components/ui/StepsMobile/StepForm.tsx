@@ -1,9 +1,8 @@
-import SelectField from "../common/form/SelectField";
-import TextAreaField from "../common/form/TextAreaField";
-import CheckboxField from "../common/form/CheckboxField";
-import { useCallback } from "react";
+import SelectField from "../../common/form/SelectField";
+import TextAreaField from "../../common/form/TextAreaField";
+import CheckboxField from "../../common/form/CheckboxField";
+import { useCallback, useEffect } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
-import { usePharmaciesOptions } from "@/app/hooks/usePharmaciesOptions";
 import {
   HStack,
   Badge,
@@ -14,17 +13,20 @@ import {
   Circle,
   Text,
 } from "@chakra-ui/react";
-import { useTicketsStore } from "@/app/store/useTicketsStore";
 import type { CategoryKey, CategoryInfo } from "@/app/types/common";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { CiFolderOn } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { BsQuestionCircle } from "react-icons/bs";
-import HeaderModalMobile from "./HeaderModalMobile";
+import HeaderModalMobile from "../Mobile/HeaderModalMobile";
 import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";
 import { usePrioritySelectedValue } from "@/app/hooks/usePrioritySelectedValue";
 import type { TicketFormBaseProps } from "@/app/types/forms";
 import type { HandleChangeFn } from "@/app/types/forms";
+import { useTicketsPageStore } from "@/app/store/useTicketsPageStore";
+import { usePharmaciesStore } from "@/app/store/usePharmaciesStore";
+import { useCategoriesStore } from "@/app/store/useCategoriesStore";
+import { usePrioritiesStore } from "@/app/store/usePrioritiesStore";
 
 type StepFormProps = TicketFormBaseProps & {
   onShowInfo?: (info: CategoryInfo) => void;
@@ -39,8 +41,13 @@ const StepForm = ({
   onShowInfo,
   onAttachFiles,
 }: StepFormProps) => {
-  const { tickets, priorities, prioritiesList, categoriesList } =
-    useTicketsStore();
+  const { loadAll } = useTicketsPageStore();
+  useEffect(() => {
+    loadAll();
+  }, []);
+  const { pharmacies, pharmaciesList } = usePharmaciesStore();
+  const { categoriesList } = useCategoriesStore();
+  const { priorities, prioritiesList } = usePrioritiesStore();
 
   const handleChange: HandleChangeFn = useCallback((key, value) => {
     setData((prev) => ({ ...prev, [key]: value }));
@@ -51,11 +58,11 @@ const StepForm = ({
     setData(initialData);
     onClose?.();
   };
-  const getPharmacySelectedValue = usePharmacySelectedValue(tickets);
-  const getPrioritySelectedValue = usePrioritySelectedValue(priorities);
   const prioritiesOptions = useOptions(prioritiesList);
   const categoriesOptions = useOptions(categoriesList);
-  const pharmaciesOptions = usePharmaciesOptions(tickets);
+  const pharmaciesOptions = useOptions(pharmaciesList);
+  const getPharmacySelectedValue = usePharmacySelectedValue(pharmacies);
+  const getPrioritySelectedValue = usePrioritySelectedValue(priorities);
 
   const indicator = (
     <Badge variant="outline" size="md">

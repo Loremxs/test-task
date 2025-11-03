@@ -1,19 +1,21 @@
-import SelectField from "../common/form/SelectField";
-import TextAreaField from "../common/form/TextAreaField";
-import CheckboxField from "../common/form/CheckboxField";
-import UploadFileField from "../common/form/UploadFileField";
-import { useCallback } from "react";
+import SelectField from "../../common/form/SelectField";
+import TextAreaField from "../../common/form/TextAreaField";
+import CheckboxField from "../../common/form/CheckboxField";
+import UploadFileField from "../../common/form/UploadFileField";
+import { useCallback, useEffect } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
-import { usePharmaciesOptions } from "@/app/hooks/usePharmaciesOptions";
 import { HStack, Badge, Flex, Box, VStack, Button } from "@chakra-ui/react";
-import InfoBlock from "./InfoBlock";
+import InfoBlock from "../Ticket/InfoBlock";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import type { CategoryKey } from "@/app/types/common";
-import { useTicketsStore } from "@/app/store/useTicketsStore";
 import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";
 import { usePrioritySelectedValue } from "@/app/hooks/usePrioritySelectedValue";
 import type { TicketFormBaseProps } from "@/app/types/forms";
 import type { HandleChangeFn } from "@/app/types/forms";
+import { useTicketFormStore } from "@/app/store/useTicketFormStore";
+import { usePharmaciesStore } from "@/app/store/usePharmaciesStore";
+import { useCategoriesStore } from "@/app/store/useCategoriesStore";
+import { usePrioritiesStore } from "@/app/store/usePrioritiesStore";
 
 type TicketAddFormDesktopProps = TicketFormBaseProps;
 
@@ -23,8 +25,14 @@ const TicketAddFormDesktop = ({
   setData,
   initialData,
 }: TicketAddFormDesktopProps) => {
-  const { tickets, priorities, prioritiesList, categoriesList } =
-    useTicketsStore();
+  const { loadFormData } = useTicketFormStore();
+  useEffect(() => {
+    loadFormData();
+  }, []);
+  const { pharmacies, pharmaciesList } = usePharmaciesStore();
+  const { categoriesList } = useCategoriesStore();
+  const { priorities, prioritiesList } = usePrioritiesStore();
+
   const handleChange: HandleChangeFn = useCallback((key, value) => {
     setData((prevState) => {
       return { ...prevState, [key]: value };
@@ -42,8 +50,8 @@ const TicketAddFormDesktop = ({
   };
   const prioritiesOptions = useOptions(prioritiesList);
   const categoriesOptions = useOptions(categoriesList);
-  const pharmaciesOptions = usePharmaciesOptions(tickets);
-  const getPharmacySelectedValue = usePharmacySelectedValue(tickets);
+  const pharmaciesOptions = useOptions(pharmaciesList);
+  const getPharmacySelectedValue = usePharmacySelectedValue(pharmacies);
   const getPrioritySelectedValue = usePrioritySelectedValue(priorities);
 
   const indicator = (
