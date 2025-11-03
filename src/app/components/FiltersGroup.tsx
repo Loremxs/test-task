@@ -39,7 +39,9 @@ const FiltersGroup = <T,>({
             key={String(item.value)}
             variant={isSelected ? "solid" : "subtle"}
             size={isMobile ? "sm" : "md"}
-            onClick={() => onItemSelect(item.value)}
+            onClick={() => {
+              if (item.value !== undefined) onItemSelect(item.value);
+            }}
           >
             {item.label}
           </Button>

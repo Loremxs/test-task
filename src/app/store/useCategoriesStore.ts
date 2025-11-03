@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import type { Category } from "./types/ticket";
-import { categories } from "./api/categories";
+import type { Category } from "../types/ticket";
+import { categories } from "../api/categories";
 
 type CategoriesState = {
   categories: Record<string, Category>;

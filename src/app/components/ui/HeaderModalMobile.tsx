@@ -3,7 +3,7 @@ import { IoMdArrowBack } from "react-icons/io";
 
 type HeaderModalMobileProps = {
   title: string;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const HeaderModalMobile = ({ title, onClose }: HeaderModalMobileProps) => {

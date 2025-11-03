@@ -8,14 +8,24 @@ import { usePharmaciesOptions } from "@/app/hooks/usePharmaciesOptions";
 import { HStack, Badge, Flex, Box, VStack, Button } from "@chakra-ui/react";
 import InfoBlock from "./InfoBlock";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
-import { useTicketsStore } from "@/app/useTicketsStore";
+import type { CategoryKey } from "@/app/types/common";
+import { useTicketsStore } from "@/app/store/useTicketsStore";
 import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";
 import { usePrioritySelectedValue } from "@/app/hooks/usePrioritySelectedValue";
+import type { TicketFormBaseProps } from "@/app/types/forms";
+import type { HandleChangeFn } from "@/app/types/forms";
 
-const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
+type TicketAddFormDesktopProps = TicketFormBaseProps;
+
+const TicketAddFormDesktop = ({
+  onClose,
+  data,
+  setData,
+  initialData,
+}: TicketAddFormDesktopProps) => {
   const { tickets, priorities, prioritiesList, categoriesList } =
     useTicketsStore();
-  const handleChange = useCallback((key, value) => {
+  const handleChange: HandleChangeFn = useCallback((key, value) => {
     setData((prevState) => {
       return { ...prevState, [key]: value };
     });
@@ -42,7 +52,9 @@ const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
     </Badge>
   );
   const info =
-    data.category.length > 0 ? categoryInfoByType[data.category[0]] : undefined;
+    data.category.length > 0
+      ? categoryInfoByType[data.category[0] as CategoryKey]
+      : undefined;
   return (
     <Box mt={2}>
       <Flex direction={{ base: "column", md: "row" }} gap={8} align="start">
@@ -56,7 +68,7 @@ const TicketAddFormDesktop = ({ onClose, data, setData, initialData }) => {
             size={"lg"}
             CustomSelectedValue={
               data.pharmacy[0]
-                ? getPharmacySelectedValue(data.pharmacy[0], tickets)
+                ? getPharmacySelectedValue(data.pharmacy[0])
                 : null
             }
             CustomIndicator={data.pharmacy[0] ? <div>{indicator}</div> : null}

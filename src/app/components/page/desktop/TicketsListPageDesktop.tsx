@@ -9,10 +9,10 @@ import { useFilterTickets } from "../../../hooks/useFilterTickets";
 import TicketsModal from "../../ui/TicketModal";
 import PDFExportButton from "../../ui/PDFExportButton";
 import OnlyMyTicketsFilter from "../../ui/OnlyMyTicketsFilter";
-import { useTicketsPageStore } from "@/app/hooks/useTicketsPageStore";
-import { useTicketsStore } from "@/app/useTicketsStore";
-import { usePrioritiesStore } from "@/app/usePrioritiesStore";
-import { useCategoriesStore } from "@/app/useCategoriesStore";
+import { useTicketsPageStore } from "@/app/store/useTicketsPageStore";
+import { useTicketsStore } from "@/app/store/useTicketsStore";
+import { usePrioritiesStore } from "@/app/store/usePrioritiesStore";
+import { useCategoriesStore } from "@/app/store/useCategoriesStore";
 import type { FilterItem } from "@/app/types/common";
 import type { Status } from "@/app/types/ticket";
 
@@ -22,7 +22,7 @@ const TicketsListPageDesktop = () => {
   const { tickets, isLoading } = useTicketsStore();
   const { loadAll } = useTicketsPageStore();
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState(null);
+  const [statusFilter, setStatusFilter] = useState<Status | null>(null);
   useEffect(() => {
     loadAll();
   }, []);
@@ -63,7 +63,7 @@ const TicketsListPageDesktop = () => {
       >
         <HStack>
           <SearchInput value={search} onChange={setSearch} />
-          <PDFExportButton /> {/*заглушка */}
+          <PDFExportButton />
           <TicketsModal />
         </HStack>
         <FiltersGroup

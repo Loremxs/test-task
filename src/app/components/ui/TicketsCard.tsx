@@ -3,8 +3,14 @@ import StatusBadge from "./StatusBadge";
 import PriorityInfo from "./PriorityInfo";
 import InfoBadge from "./InfoBadge";
 import TimerInfo from "./TimerInfo";
+import type { Ticket, Priority } from "@/app/types/ticket";
 
-const TicketsCard = ({ ticket, priority }) => {
+type TicketsCardProps = {
+  ticket: Ticket;
+  priority: Priority;
+};
+
+const TicketsCard = ({ ticket, priority }: TicketsCardProps) => {
   return (
     <Card.Root
       size="sm"

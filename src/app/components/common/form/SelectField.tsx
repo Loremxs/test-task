@@ -1,8 +1,18 @@
 "use client";
 import { Select } from "@chakra-ui/react";
-import type { SelectFieldProps } from "@/app/types/forms";
-import { useBreakpointValue } from "@chakra-ui/react";
-const SelectField = <T,>({
+import { useBreakpointValue, type ListCollection } from "@chakra-ui/react";
+import type { OptionItem } from "@/app/types/common";
+type SelectFieldProps<T extends OptionItem> = {
+  label: string;
+  placeholder?: string;
+  options: ListCollection<T>;
+  value: string[];
+  size?: "sm" | "md" | "lg";
+  onChange: (value: string[]) => void;
+  CustomSelectedValue?: React.ReactNode;
+  CustomIndicator?: React.ReactNode;
+};
+const SelectField = <T extends OptionItem>({
   label,
   placeholder,
   options,
@@ -33,7 +43,7 @@ const SelectField = <T,>({
           borderColor="#B0B0B0"
           cursor="pointer"
         >
-          {!!CustomSelectedValue ? (
+          {CustomSelectedValue ? (
             CustomSelectedValue
           ) : (
             <Select.ValueText
@@ -43,7 +53,7 @@ const SelectField = <T,>({
           )}
         </Select.Trigger>
         <Select.IndicatorGroup>
-          {!!CustomIndicator ? CustomIndicator : <Select.Indicator />}
+          {CustomIndicator ? CustomIndicator : <Select.Indicator />}
         </Select.IndicatorGroup>
       </Select.Control>
       <Select.Positioner>

@@ -14,7 +14,8 @@ import {
   Circle,
   Text,
 } from "@chakra-ui/react";
-import { useTicketsStore } from "@/app/useTicketsStore";
+import { useTicketsStore } from "@/app/store/useTicketsStore";
+import type { CategoryKey, CategoryInfo } from "@/app/types/common";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { CiFolderOn } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
@@ -22,6 +23,13 @@ import { BsQuestionCircle } from "react-icons/bs";
 import HeaderModalMobile from "./HeaderModalMobile";
 import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";
 import { usePrioritySelectedValue } from "@/app/hooks/usePrioritySelectedValue";
+import type { TicketFormBaseProps } from "@/app/types/forms";
+import type { HandleChangeFn } from "@/app/types/forms";
+
+type StepFormProps = TicketFormBaseProps & {
+  onShowInfo?: (info: CategoryInfo) => void;
+  onAttachFiles?: () => void;
+};
 
 const StepForm = ({
   onClose,
@@ -30,11 +38,11 @@ const StepForm = ({
   initialData,
   onShowInfo,
   onAttachFiles,
-}) => {
+}: StepFormProps) => {
   const { tickets, priorities, prioritiesList, categoriesList } =
     useTicketsStore();
 
-  const handleChange = useCallback((key, value) => {
+  const handleChange: HandleChangeFn = useCallback((key, value) => {
     setData((prev) => ({ ...prev, [key]: value }));
   }, []);
 
@@ -56,9 +64,11 @@ const StepForm = ({
   );
 
   const info =
-    data.category.length > 0 ? categoryInfoByType[data.category[0]] : undefined;
-  const attachedFiles = data?.files?.length || null;
-  const isSelectedCategory = data?.category?.length || null;
+    data.category.length > 0
+      ? categoryInfoByType[data.category[0] as CategoryKey]
+      : undefined;
+  const attachedFiles = data?.files?.length ?? 0;
+  const isSelectedCategory = data?.category?.length || undefined;
 
   return (
     <>
@@ -74,7 +84,7 @@ const StepForm = ({
             size="md"
             CustomSelectedValue={
               data.pharmacy[0]
-                ? getPharmacySelectedValue(data.pharmacy[0], tickets)
+                ? getPharmacySelectedValue(data.pharmacy[0])
                 : null
             }
             CustomIndicator={data.pharmacy[0] ? <div>{indicator}</div> : null}
@@ -98,7 +108,7 @@ const StepForm = ({
               {isSelectedCategory && (
                 <HStack
                   as="button"
-                  onClick={() => onShowInfo(info)}
+                  onClick={() => onShowInfo?.(info!)}
                   gap={1}
                   color="#440AF1"
                   cursor="pointer"

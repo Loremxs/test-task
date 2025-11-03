@@ -1,6 +1,6 @@
-import { useTicketsStore } from "../useTicketsStore";
-import { usePrioritiesStore } from "../usePrioritiesStore";
-import { useCategoriesStore } from "../useCategoriesStore";
+import { useTicketsStore } from "./useTicketsStore";
+import { usePrioritiesStore } from "./usePrioritiesStore";
+import { useCategoriesStore } from "./useCategoriesStore";
 
 export const useTicketsPageStore = () => {
   const { loadTicketsMockData } = useTicketsStore();

@@ -1,6 +1,6 @@
-import type { TStatus } from "@/app/types/common";
+import type { Status } from "@/app/types/ticket";
 export const statusesConfig: Record<
-  TStatus,
+  Status,
   { localization: string; color: string }
 > = {
   new: { localization: "Новые", color: "#F0CDFA" },

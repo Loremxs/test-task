@@ -12,7 +12,7 @@ import "../../../styles/Modal.css";
 type ModalProps = {
   title: string;
   trigger?: ReactNode;
-  children: ReactNode;
+  children: React.ReactElement<{ onClose?: () => void }>;
   footer?: ReactNode;
   onOpenChange?: (open: boolean) => void;
   hideFooter?: boolean;

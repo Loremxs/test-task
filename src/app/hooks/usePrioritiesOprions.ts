@@ -1,7 +1,7 @@
 import { createListCollection } from "@chakra-ui/react";
 import { useMemo } from "react";
-
-export const usePrioritiesOptions = (priorities) => {
+import type { Priority } from "../types/ticket";
+export const usePrioritiesOptions = (priorities: Priority[] = []) => {
   return useMemo(() => {
     return createListCollection({
       items: priorities.map((priority) => {

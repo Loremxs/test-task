@@ -3,8 +3,8 @@ import type { Ticket, Status } from "@/app/types/ticket";
 
 type UseFilterTicketsParams = {
   search: string;
-  statusFilter: Ticket | null;
-  tickets: Status[];
+  statusFilter: Status | null;
+  tickets: Ticket[];
 };
 
 export const useFilterTickets = ({

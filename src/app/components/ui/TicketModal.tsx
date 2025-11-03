@@ -5,10 +5,11 @@ import TicketAddFormMobile from "./TicketAddFormMobile";
 import { FiPlus } from "react-icons/fi";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { useState } from "react";
+import type { TicketFormData } from "@/app/types/forms";
 const TicketModal = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
 
-  const initialData = {
+  const initialData: TicketFormData = {
     pharmacy: [],
     category: [],
     guarantee: false,
@@ -17,6 +18,7 @@ const TicketModal = () => {
     description: "",
     files: [],
   };
+
   const [data, setData] = useState(initialData);
   const handleModalChange = (open: boolean) => {
     if (!open) {

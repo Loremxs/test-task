@@ -3,7 +3,15 @@ import { Box } from "@chakra-ui/react";
 import StepForm from "./StepForm";
 import StepFiles from "./StepFile";
 import StepInfo from "./StepInfo";
-const TicketAddFormMobile = ({ onClose, data, setData, initialData }) => {
+import type { TicketFormBaseProps } from "@/app/types/forms";
+type TicketAddFormMobileProps = TicketFormBaseProps;
+
+const TicketAddFormMobile = ({
+  onClose,
+  data,
+  setData,
+  initialData,
+}: TicketAddFormMobileProps) => {
   const [currentPage, setCurrentPage] = useState<"form" | "files" | "info">(
     "form"
   );

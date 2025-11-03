@@ -11,7 +11,12 @@ import {
 import { CiImageOn } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import CustomFileUploadList from "../../ui/CustomFileUploadList";
-import type { UploadFileFieldProps } from "@/app/types/forms";
+type UploadFileFieldProps = {
+  label?: string;
+  placeholder?: string;
+  value?: File[];
+  onChange: (files: File[]) => void;
+};
 
 const UploadFileField: React.FC<UploadFileFieldProps> = ({
   label,

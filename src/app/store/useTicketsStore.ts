@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import type { Ticket, Priority, Category } from "./types/ticket";
-import { mockTickets } from "./api/tickets.api";
-import { priorities } from "./api/priorities";
-import { categories } from "./api/categories";
+import type { Ticket, Priority, Category } from "./../types/ticket";
+import { mockTickets } from "./../api/tickets.api";
+import { priorities } from "./../api/priorities";
+import { categories } from "./../api/categories";
 
 type TicketsState = {
   tickets: Ticket[];
@@ -14,7 +14,7 @@ type TicketsState = {
   loadTicketsMockData: () => void;
 };
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const useTicketsStore = create<TicketsState>((set) => ({
   tickets: [],
@@ -37,8 +37,8 @@ export const useTicketsStore = create<TicketsState>((set) => ({
     );
     set({
       tickets: mockTickets,
-      categories: categoriesMap, // Вынести в отдельный стор
-      priorities: prioritiesMap, // const
+      categories: categoriesMap,
+      priorities: prioritiesMap,
       categoriesList: categories,
       prioritiesList: priorities,
       isLoading: false,

@@ -1,6 +1,9 @@
+import type { CategoryKey, CategoryInfo } from "../types/common";
+
 const categoryInfoTitleWarning = "⚠️ Заявка нужна, если:";
 const categoryInfoTitleDanger = "❌ Заявку создавать не нужно, если:";
-export const categoryInfoByType = {
+
+export const categoryInfoByType: Record<CategoryKey, CategoryInfo> = {
   cat_001: {
     warning: {
       title: categoryInfoTitleWarning,

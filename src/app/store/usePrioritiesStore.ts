@@ -1,6 +1,6 @@
+import { priorities } from "./../api/priorities";
 import { create } from "zustand";
-import type { Priority } from "./types/ticket";
-import { priorities } from "./api/priorities";
+import type { Priority } from "../types/ticket";
 
 type PrioritiesState = {
   priorities: Record<string, Priority>;

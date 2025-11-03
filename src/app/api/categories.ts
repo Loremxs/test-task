@@ -1,6 +1,6 @@
-import type { TCategory } from "../types/common";
+import type { Category } from "../types/ticket";
 
-export const categories: TCategory[] = [
+export const categories: Category[] = [
   { _id: "cat_001", name: "Кассы" },
   { _id: "cat_002", name: "Холодильники" },
   { _id: "cat_003", name: "Кондиционеры" },
