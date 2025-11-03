@@ -1,10 +1,10 @@
 import { VStack } from "@chakra-ui/react";
-import InfoBlock from "../Ticket/InfoBlock";
-import HeaderModalMobile from "../Mobile/HeaderModalMobile";
+import InfoBlock from "../../../Ticket/InfoBlock";
+import HeaderModalMobile from "../../../Mobile/HeaderModalMobile";
 import React from "react";
 import type { InfoData } from "@/app/types/common";
 type StepInfoProps = {
-  info?: InfoData;
+  info?: InfoData | null;
   onBack: () => void;
 };
 

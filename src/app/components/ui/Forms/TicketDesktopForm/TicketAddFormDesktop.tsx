@@ -1,11 +1,11 @@
-import SelectField from "../../common/form/SelectField";
-import TextAreaField from "../../common/form/TextAreaField";
-import CheckboxField from "../../common/form/CheckboxField";
-import UploadFileField from "../../common/form/UploadFileField";
+import SelectField from "../../../common/form/SelectField";
+import TextAreaField from "../../../common/form/TextAreaField";
+import CheckboxField from "../../../common/form/CheckboxField";
+import UploadFileField from "../../../common/form/UploadFileField";
 import { useCallback, useEffect } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
 import { HStack, Badge, Flex, Box, VStack, Button } from "@chakra-ui/react";
-import InfoBlock from "../Ticket/InfoBlock";
+import InfoBlock from "../../Ticket/InfoBlock";
 import { categoryInfoByType } from "@/app/constants/categoryCard";
 import type { CategoryKey } from "@/app/types/common";
 import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";

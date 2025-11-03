@@ -11,4 +11,10 @@
   .priority-info-block {
     font-size: 12px;
   }
+  .info-card-title {
+    font-size: 14px;
+  }
+  .info-card-list {
+    font-size: 12px;
+  }
 }

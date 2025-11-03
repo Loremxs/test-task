@@ -1,6 +1,6 @@
-import SelectField from "../../common/form/SelectField";
-import TextAreaField from "../../common/form/TextAreaField";
-import CheckboxField from "../../common/form/CheckboxField";
+import SelectField from "../../../../common/form/SelectField";
+import TextAreaField from "../../../../common/form/TextAreaField";
+import CheckboxField from "../../../../common/form/CheckboxField";
 import { useCallback, useEffect } from "react";
 import { useOptions } from "@/app/hooks/useOptions";
 import {
@@ -18,7 +18,7 @@ import { categoryInfoByType } from "@/app/constants/categoryCard";
 import { CiFolderOn } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
 import { BsQuestionCircle } from "react-icons/bs";
-import HeaderModalMobile from "../Mobile/HeaderModalMobile";
+import HeaderModalMobile from "../../../Mobile/HeaderModalMobile";
 import { usePharmacySelectedValue } from "@/app/hooks/usePharmaciesSelectedValue";
 import { usePrioritySelectedValue } from "@/app/hooks/usePrioritySelectedValue";
 import type { TicketFormBaseProps } from "@/app/types/forms";

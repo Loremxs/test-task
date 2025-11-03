@@ -1,5 +1,5 @@
 import { Button, HStack, useBreakpointValue } from "@chakra-ui/react";
-import "../../styles/FiltersGroup.css";
+import "../../../styles/FiltersGroup.css";
 import type { FilterItem } from "@/app/types/common";
 import { Fragment } from "react/jsx-runtime";
 

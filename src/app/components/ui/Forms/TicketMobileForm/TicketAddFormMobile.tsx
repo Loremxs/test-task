@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Box } from "@chakra-ui/react";
-import StepForm from "../StepsMobile/StepForm";
-import StepFiles from "../StepsMobile/StepFile";
-import StepInfo from "../StepsMobile/StepInfo";
+import StepForm from "./StepsMobile/StepForm";
+import StepFiles from "./StepsMobile/StepFile";
+import StepInfo from "./StepsMobile/StepInfo";
 import type { TicketFormBaseProps } from "@/app/types/forms";
+import type { CategoryInfo } from "@/app/types/common";
 type TicketAddFormMobileProps = TicketFormBaseProps;
 
 const TicketAddFormMobile = ({
@@ -16,7 +17,8 @@ const TicketAddFormMobile = ({
     "form"
   );
 
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState<CategoryInfo | null>(null);
+
   return (
     <Box flex={1} h={"100%"}>
       {currentPage === "form" && (
@@ -42,11 +44,7 @@ const TicketAddFormMobile = ({
       )}
 
       {currentPage === "info" && (
-        <StepInfo
-          data={data}
-          onBack={() => setCurrentPage("form")}
-          info={info}
-        />
+        <StepInfo onBack={() => setCurrentPage("form")} info={info} />
       )}
     </Box>
   );

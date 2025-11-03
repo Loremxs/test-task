@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
 import { Stack, HStack, Separator, Loader } from "@chakra-ui/react";
 import { statuses } from "@/app/api/statuses";
-import FiltersGroup from "../../ui/FiltersGroup";
+import FiltersGroup from "../../ui/Panels/FiltersGroup";
 import TicketsTable from "../../ui/Desktop/TicketsTable";
 import SearchInput from "../../ui/Search/SearchInput";
 import { statusesConfig } from "../../../constants/statuses";
 import { useFilterTickets } from "../../../hooks/useFilterTickets";
-import TicketsModal from "../../ui/TicketModal";
+import TicketsModal from "../../ui/Modals/TicketModal";
 import PDFExportButton from "../../ui/Buttons/PDFExportButton";
 import OnlyMyTicketsFilter from "../../ui/Buttons/OnlyMyTicketsFilter";
 import { useTicketsPageStore } from "@/app/store/useTicketsPageStore";

@@ -1,6 +1,5 @@
 import { Box, HStack, Text, List } from "@chakra-ui/react";
 import { IoWarningSharp, IoCloseSharp } from "react-icons/io5";
-import { useBreakpointValue } from "@chakra-ui/react";
 
 type InfoBlockProps = {
   type: "warning" | "danger";
@@ -9,7 +8,6 @@ type InfoBlockProps = {
 };
 
 const InfoBlock = ({ type, title, list }: InfoBlockProps) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
   let icon;
   let borderColor;
   let iconColor;
@@ -39,13 +37,19 @@ const InfoBlock = ({ type, title, list }: InfoBlockProps) => {
       borderColor={borderColor}
       w="full"
       flex="1"
-      fontSize={isMobile ? "12px" : "10px"}
+      fontSize={"10px"}
       color="#1C1C1C"
     >
       <HStack>
-        <Text fontSize={isMobile ? "14px" : "10px"}>{title}</Text>
+        <Text className="info-card-title">{title}</Text>
       </HStack>
-      <List.Root as="ul" pl={4} pt={2} lineHeight={"shorter"}>
+      <List.Root
+        as="ul"
+        pl={4}
+        pt={2}
+        lineHeight={"shorter"}
+        className="info-card-list"
+      >
         {list.map((item, i) => (
           <List.Item as="li" key={i}>
             {item}

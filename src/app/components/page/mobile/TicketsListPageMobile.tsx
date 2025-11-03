@@ -1,4 +1,4 @@
-import FiltersGroup from "../../ui/FiltersGroup";
+import FiltersGroup from "../../ui/Panels/FiltersGroup";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useTicketsPageStore } from "@/app/store/useTicketsPageStore";
 import { useTicketsStore } from "@/app/store/useTicketsStore";
@@ -13,7 +13,7 @@ import { Stack, Text, Box } from "@chakra-ui/react";
 import OnlyMyTicketsFilter from "../../ui/Buttons/OnlyMyTicketsFilter";
 import TicketsCard from "../../ui/Mobile/TicketsCard";
 import MobileSearchBar from "../../ui/Search/MobileSearchBar";
-import TicketModal from "../../ui/TicketModal";
+import TicketModal from "../../ui/Modals/TicketModal";
 
 const TicketsListPageMobile = () => {
   const { priorities } = usePrioritiesStore();
